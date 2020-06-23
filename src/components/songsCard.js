@@ -13,8 +13,11 @@ const styles = (theme) => ({
     borderRadius: 10,
     backgroundColor: 'transparent',
   },
+  rootGridTitle: {
+    width: '100%',
+  },
   title: {
-    color: 'white',
+    color: '#EE4622',
     fontSize: '24px',
   },
   gridBase: {
@@ -62,8 +65,10 @@ const styles = (theme) => ({
     borderRadius: 10,
   },
   TypographyTitle: {
-    maxWidth: '200px',
+    maxWidth: '126px',
+    width: 126,
     fontWeight: 'bold',
+    fontSize: 18,
     color: 'white',
     backgroundColor: '#3a3a3a',
     marginTop: '4px',
@@ -75,12 +80,21 @@ const styles = (theme) => ({
     fontSize: '14px',
     marginTop: '4px',
   },
+  TypographyArtist: {
+    color: 'white',
+    backgroundColor: '#3a3a3a',
+    fontSize: '14px',
+    marginBottom: 10,
+  },
   Div: {
     padding: '16px',
   },
   Link: {
     textDecoration: 'none',
     color: 'transparent',
+  },
+  pusherCard: {
+    height: 85,
   },
 });
 class songsCard extends Component {
@@ -117,6 +131,11 @@ class songsCard extends Component {
           <div style={{ color: 'white' }}>loading...</div>
         ) : (
           <Grid className={classes.gridBase} container direction='column' justify='flex-start' alignItems='flex-start'>
+            <Grid item xs classes={{ root: classes.rootGridTitle }}>
+              <Grid container spacing={0} direction='row' alignItems='center' justify='center'>
+                <b className={classes.title}>Dengarkan Dan Rasakan</b>
+              </Grid>
+            </Grid>
             <Grid item xs>
               <Grid
                 className={classes.gridCard}
@@ -134,8 +153,17 @@ class songsCard extends Component {
                           <CardActionArea className={classes.CardActionArea}>
                             <Link className={classes.Link}>
                               <img src={detailData.thumbnailLink} alt='asdawda' className={classes.Img} />
-                              <Typography className={classes.TypographyTitle}>{detailData.title}</Typography>
-                              <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
+                              <Grid container direction='row' justify='space-around' alignItems='center'>
+                                <Grid xs>
+                                  <Typography noWrap className={classes.TypographyTitle}>
+                                    {detailData.title}
+                                  </Typography>
+                                </Grid>
+                                <Grid xs>
+                                  <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
+                                </Grid>
+                              </Grid>
+                              <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
                             </Link>
                           </CardActionArea>
                         </Card>
@@ -147,6 +175,8 @@ class songsCard extends Component {
             </Grid>
           </Grid>
         )}
+        {/* kasih logic di bawah ini buat kalo player terbuka otomatis muncul, dan sebaliknya */}
+        <div className={classes.pusherCard}></div>
       </div>
     );
   }

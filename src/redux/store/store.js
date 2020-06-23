@@ -6,11 +6,12 @@ import { userReducer } from '../reducers/account_reducer';
 import { authReducer } from '../reducers/auth_reducer';
 import { upgradeReducer } from '../reducers/upgrade_reducer';
 import { getDataSongsReducer } from '../reducers/song_reducers';
+import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
+import { getDataTypesReducer } from '../reducers/types_reducers';
 
 // // OTW DI HAPUS
 // import { movieReducer, tvReducer, addMovieReducer, detailMovieReducer, addEpisode } from '../reducers/movie_reducer';
 // import { episodeReducer, episodeAddReducer } from '../reducers/episode_reducer';
-// import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 // import { categoriesReducer } from '../reducers/categories_reducer';
 // global reducer combine
 const reducers = combineReducers({
@@ -20,13 +21,14 @@ const reducers = combineReducers({
   // tvReducer,
   // detailMovieReducer,
   // episodeReducer,
-  // transactionsReducer,
-  // transactionByIdReducer,
+
   // addEpisode,
   // categoriesReducer,
   // addMovieReducer,
   // episodeAddReducer,
   // // ### OTW DI HAPUS
+  transactionsReducer,
+  transactionByIdReducer,
   modalRegisterReducer,
   modalLoginReducer,
   userReducer,
@@ -35,6 +37,9 @@ const reducers = combineReducers({
 
   // song
   getDataSongsReducer,
+
+  // type
+  getDataTypesReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

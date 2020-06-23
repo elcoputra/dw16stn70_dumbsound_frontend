@@ -16,8 +16,8 @@ import {
 import { AttachFile, Add } from '@material-ui/icons';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { getCategories } from '../redux/actions/categories_action';
-import { addDataMovie } from '../redux/actions/movie_action';
+// import { getCategories } from '../redux/actions/categories_action';
+// import { addDataMovie } from '../redux/actions/movie_action';
 
 const styles = (theme) => ({
   // Styling Dropdown
@@ -608,10 +608,8 @@ class addFilm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categoriesReducer: state.categoriesReducer,
-    addMovieReducer: state.addMovieReducer,
-    episodeAddReducer: state.episodeAddReducer,
+    getDataTypesReducer: state.getDataTypesReducer,
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { getCategories, addDataMovie }))(addFilm);
+export default compose(withStyles(styles), connect(mapStateToProps, {}))(addFilm);
