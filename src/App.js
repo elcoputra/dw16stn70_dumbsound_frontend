@@ -43,17 +43,11 @@ class App extends Component {
         <div>
           <CssBaseline />
           <Navbar />
-
           <Switch>
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
-            <Route path='/learn' component={learn} />
             <Route path='/add-artist' component={AddArtist} />
-            <PrivateRouteUser path='/movies' component={ListFilm} />
             <PrivateRouteUser path='/upgrade' component={Upgrade} />
             <PrivateRouteUser path='/profile' component={Profile} />
-            <PrivateRouteSubscribe path='/detail' component={DetailPlayer} />
-            <PrivateRouteUser path='/tv' component={TVShows} />
-            <PrivateRouteAdmin path='/moviess' component={Movies} />
             <Route path='/' component={Home} />
           </Switch>
           <MusicPlayer />

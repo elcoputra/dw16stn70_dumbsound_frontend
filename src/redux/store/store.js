@@ -8,6 +8,7 @@ import { upgradeReducer } from '../reducers/upgrade_reducer';
 import { getDataSongsReducer } from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
+import { PostDataArtistReducer } from '../reducers/arist_reducers';
 
 // // OTW DI HAPUS
 // import { movieReducer, tvReducer, addMovieReducer, detailMovieReducer, addEpisode } from '../reducers/movie_reducer';
@@ -40,6 +41,9 @@ const reducers = combineReducers({
 
   // type
   getDataTypesReducer,
+
+  // artist
+  PostDataArtistReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

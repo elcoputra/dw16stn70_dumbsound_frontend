@@ -11,19 +11,19 @@ export const getDataTypesReducer = (state = initialstateTypes, action) => {
     case GET_TYPES_REQUEST:
       return {
         ...state,
-        loading: true,
+        loadingTypes: true,
       };
     case GET_TYPES_SUCCSESS:
       return {
         ...state,
-        loading: false,
+        loadingTypes: false,
         types: action.payload,
       };
     case GET_TYPES_ERROR:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        loadingTypes: false,
+        errorTypes: action.payload,
       };
     default:
       return state;

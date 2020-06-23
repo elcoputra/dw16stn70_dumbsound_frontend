@@ -237,7 +237,7 @@ const styles = (theme) => ({
   },
 });
 
-class addArtist extends Component {
+class addSong extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -441,4 +441,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { getDataTypesAction, PostDataArtistAction }))(addArtist);
+export default compose(withStyles(styles), connect(mapStateToProps, { getDataTypesAction, PostDataArtistAction }))(addSong);
