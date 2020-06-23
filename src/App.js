@@ -11,6 +11,7 @@ import DetailPlayer from './pages/detailPlayer';
 import Profile from './pages/profilePage';
 import Upgrade from './pages/upgradePage';
 import AddArtist from './pages/addArtist';
+import AddSong from './pages/addSongs';
 import ListFilm from './pages/listFilm';
 import Transaction from './pages/transactionPage';
 import learn from './pages/learnREDUX';
@@ -46,6 +47,7 @@ class App extends Component {
           <Switch>
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
             <Route path='/add-artist' component={AddArtist} />
+            <Route path='/add-song' component={AddSong} />
             <PrivateRouteUser path='/upgrade' component={Upgrade} />
             <PrivateRouteUser path='/profile' component={Profile} />
             <Route path='/' component={Home} />

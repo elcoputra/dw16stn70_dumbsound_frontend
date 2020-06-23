@@ -232,8 +232,10 @@ const styles = (theme) => ({
   },
   TitlePage: {
     color: 'white',
-    size: 24,
+    fontSize: 24,
     fontWeight: '900',
+    marginRight: 1036,
+    marginTop: 45,
   },
 });
 
@@ -286,8 +288,6 @@ class addArtist extends Component {
     const { uploadArtistData } = this.state;
     this.props.PostDataArtistAction(uploadArtistData);
   };
-
-  // REUSABLE ADD EPISODE COMPONENT END
 
   render(props) {
     const { classes } = this.props;

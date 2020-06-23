@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { Modal, Backdrop, Fade, TextField, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { getDataTypesAction } from '../redux/actions/types_action';
-import { PostDataArtistAction } from '../redux/actions/artist_action';
+import { getDataArtistAction } from '../redux/actions/artist_action';
+import { AttachFile } from '@material-ui/icons';
 
 const styles = (theme) => ({
   // Styling Dropdown
@@ -69,9 +69,9 @@ const styles = (theme) => ({
   },
   textField: {
     background: 'rgba(210, 210, 210, 0.25)',
-    marginLeft: theme.spacing.unit,
+    marginLeft: 4,
     marginRight: theme.spacing.unit,
-    width: 927,
+    width: 935,
     height: 50,
   },
   textFieldInsertLinkThumbnailEpisode: {
@@ -120,6 +120,23 @@ const styles = (theme) => ({
   ButtonAttatch: {
     textTransform: 'none',
     marginTop: 13,
+    height: 55,
+    width: 213,
+    fontSize: '14px',
+    background: 'rgba(210, 210, 210, 0.25)',
+    color: '#B1B1B1',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderWidth: 2,
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#E50914',
+      color: 'white',
+    },
+  },
+  ButtonAttatchSong: {
+    textTransform: 'none',
+    marginRight: 943,
     height: 55,
     width: 213,
     fontSize: '14px',
@@ -232,8 +249,10 @@ const styles = (theme) => ({
   },
   TitlePage: {
     color: 'white',
-    size: 24,
+    fontSize: 24,
     fontWeight: '900',
+    marginRight: 1036,
+    marginTop: 45,
   },
 });
 
@@ -241,35 +260,59 @@ class addSong extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      uploadArtistData: {},
+      uplodSongData: {},
+      openSongAttatchment: false,
+      open: false,
     };
   }
   componentDidMount() {
-    this.props.getDataTypesAction();
+    this.props.getDataArtistAction();
   }
 
   handleChangeArtistInputGroup = (event) => {
-    const { uploadArtistData } = this.state;
+    const { uplodSongData } = this.state;
     this.setState({
-      uploadArtistData: { ...uploadArtistData, [event.target.name]: event.target.value },
+      uplodSongData: { ...uplodSongData, [event.target.name]: event.target.value },
     });
   };
+
+  // Buat buka tutup modal add thumbnail music
   handleCloseModalAttatch = () => {
     this.setState({
       open: false,
     });
   };
+
   handleButtonAttatch = () => {
     this.setState({
       open: true,
     });
   };
+
   handleButtonConfirmAttatch = () => {
-    console.log(this.state.upload);
     this.setState({
       open: false,
     });
   };
+  ////////////////////////////////////////////
+
+  // Buat buka tutup modal add song
+  handleCloseModalAttatchSong = () => {
+    this.setState({
+      openSongAttatchment: false,
+    });
+  };
+  handleButtonOpenAttatchSong = () => {
+    this.setState({
+      openSongAttatchment: true,
+    });
+  };
+  handleButtonConfirmAttatchSong = () => {
+    this.setState({
+      openSongAttatchment: false,
+    });
+  };
+  ///////////////////////////////////////
 
   handleChange(i, e) {
     const { name, value } = e.target;
@@ -283,16 +326,15 @@ class addSong extends Component {
     }));
   }
   handleSubmit = () => {
-    const { uploadArtistData } = this.state;
-    this.props.PostDataArtistAction(uploadArtistData);
+    const { uplodSongData } = this.state;
+    this.props.PostDataArtistAction(uplodSongData);
   };
 
   // REUSABLE ADD EPISODE COMPONENT END
 
   render(props) {
     const { classes } = this.props;
-    const { types, loadingTypes, errorTypes } = this.props.getDataTypesReducer;
-    const { artistsMessage, errorArtist } = this.props.PostDataArtistReducer;
+    const { artistData, loadingGetArtist, errorGetArtist } = this.props.getDataArtistReducer;
     return (
       <div className={classes.divBase}>
         <div className={classes.divider} />
@@ -300,49 +342,66 @@ class addSong extends Component {
           <Grid item xs>
             <Grid container direction='row' justify='flex-start' alignItems='flex-start'>
               <Grid item xs>
-                <div className={classes.TitlePage}>Add Artist</div>
+                <div className={classes.TitlePage}>Add Song</div>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs>
-            <div className={classes.succsessMessage}>{artistsMessage}</div>
+            {/* <div className={classes.succsessMessage}>{artistsMessage}</div> */}
           </Grid>
           <Grid item xs>
-            <div className={classes.errorMessage}>{errorArtist}</div>
+            <div className={classes.errorMessage}>{errorGetArtist}</div>
           </Grid>
+          <Grid item xs>
+            <Grid container direction='row' justify='flex-start' alignItems='center'>
+              <Grid item xs>
+                <TextField
+                  id='standard-name'
+                  label='Title'
+                  name='title'
+                  value={this.state.uplodSongData.title}
+                  onChange={this.handleChangeFilmInputGroup}
+                  className={classes.textField}
+                  margin='normal'
+                  variant='outlined'
+                  InputLabelProps={{
+                    classes: {
+                      root: classes.cssLabel,
+                      focused: classes.cssFocused,
+                      FormHelperTextProps: classes.floatingLabelFocusStyle,
+                    },
+                  }}
+                  InputProps={{
+                    classes: {
+                      root: classes.cssOutlinedInput,
+                      focused: classes.cssFocused,
+                      notchedOutline: classes.notchedOutline,
+                      FormHelperTextProps: classes.floatingLabelFocusStyle,
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs>
+                <Button variant='contained' onClick={this.handleButtonAttatch} className={classes.ButtonAttatch}>
+                  <Grid container direction='row' justify='space-between' alignItems='center'>
+                    <Grid item xs={9}>
+                      <b className={classes.attatchText}>Attatch Thumbnail</b>
+                    </Grid>
+                    <Grid className={classes.attatchIcon} item xs>
+                      <AttachFile className={classes.icon} />
+                    </Grid>
+                  </Grid>
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Grid item xs>
             <TextField
               id='standard-name'
-              label='Name'
-              name='name'
-              value={this.state.uploadArtistData.name}
-              onChange={this.handleChangeArtistInputGroup}
-              className={classes.textField2}
-              margin='normal'
-              variant='outlined'
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                  FormHelperTextProps: classes.floatingLabelFocusStyle,
-                },
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  FormHelperTextProps: classes.floatingLabelFocusStyle,
-                },
-              }}
-            />
-          </Grid>
-          <Grid item xs>
-            <TextField
-              id='standard-name'
-              label='Old'
-              name='old'
-              value={this.state.uploadArtistData.old}
+              label='Year'
+              name='year'
+              value={this.state.uplodSongData.year}
               onChange={this.handleChangeArtistInputGroup}
               type='number'
               className={classes.textField2}
@@ -364,19 +423,19 @@ class addSong extends Component {
             />
           </Grid>
           <Grid item xs>
-            {loadingTypes ? (
+            {loadingGetArtist ? (
               'Loading....'
             ) : (
               <FormControl variant='outlined' className={classes.formControl}>
                 <InputLabel className={classes.InputLabel} id='demo-simple-select-outlined-label'>
-                  Type Singer
+                  Singer
                 </InputLabel>
                 <Select
                   labelId='demo-simple-select-outlined-label'
                   id='demo-simple-select-outlined'
-                  name='typeId'
+                  name='artistId'
                   label='Type'
-                  value={this.state.uploadArtistData.typeId}
+                  value={this.state.uplodSongData.artistId}
                   onChange={this.handleChangeArtistInputGroup}
                   className={classes.select}
                   inputProps={{
@@ -386,40 +445,26 @@ class addSong extends Component {
                   }}
                   MenuProps={{ classes: { paper: classes.dropdownStyle } }}
                 >
-                  {loadingTypes
+                  {loadingGetArtist
                     ? 'FETCHING...'
-                    : types.map((TypesData) => {
-                        return <MenuItem value={TypesData.id}>{TypesData.name}</MenuItem>;
+                    : artistData.map((dataFromReducer) => {
+                        return <MenuItem value={dataFromReducer.id}>{dataFromReducer.name}</MenuItem>;
                       })}
                 </Select>
               </FormControl>
             )}
           </Grid>
           <Grid item xs>
-            <TextField
-              id='standard-name'
-              label='Start A Career'
-              name='startAcareer'
-              value={this.state.uploadArtistData.startAcareer}
-              onChange={this.handleChangeArtistInputGroup}
-              type='number'
-              className={classes.textField2}
-              margin='normal'
-              variant='outlined'
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                },
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                },
-              }}
-            />
+            <Button variant='contained' onClick={this.handleButtonOpenAttatchSong} className={classes.ButtonAttatchSong}>
+              <Grid container direction='row' justify='space-between' alignItems='center'>
+                <Grid item xs={9}>
+                  <b className={classes.attatchText}>Attatch Song</b>
+                </Grid>
+                <Grid className={classes.attatchIcon} item xs>
+                  <AttachFile className={classes.icon} />
+                </Grid>
+              </Grid>
+            </Button>
           </Grid>
           <Grid item xs>
             <Grid item>
@@ -429,6 +474,111 @@ class addSong extends Component {
             </Grid>
           </Grid>
         </Grid>
+        {/* MODAL ADD ATTACHMENT THUMBNAIL */}
+        <Modal
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          className={classes.modal}
+          open={this.state.open}
+          onClose={this.handleCloseModalAttatch}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={this.state.open}>
+            <div className={classes.paper}>
+              {/* INPUT */}
+              <b className={classes.fontModalTitle}>Cover Song</b>
+              <br />
+              <br />
+              <TextField
+                id='standard-name'
+                label='Cover Music'
+                name='thumbnailLink'
+                value={this.state.uplodSongData.thumbnailLink}
+                onChange={this.handleChangeFilmInputGroup}
+                className={classes.textField}
+                margin='normal'
+                variant='outlined'
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                  },
+                }}
+              />
+
+              <Grid item xs>
+                <Button variant='contained' onClick={this.handleButtonConfirmAttatch} className={classes.Kirim}>
+                  <div>Attatch</div>
+                </Button>
+              </Grid>
+            </div>
+          </Fade>
+        </Modal>
+        {/* MODAL ADD ATTACHMENT THUMBNAIL END*/}
+
+        {/* MODAL ADD ATTACHMENT THUMBNAIL */}
+        <Modal
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          className={classes.modal}
+          open={this.state.openSongAttatchment}
+          onClose={this.handleCloseModalAttatchSong}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={this.state.openSongAttatchment}>
+            <div className={classes.paper}>
+              {/* INPUT */}
+              <b className={classes.fontModalTitle}>Song Link</b>
+              <br />
+              <br />
+              <TextField
+                id='standard-name'
+                label='Song Link'
+                name='musicLink'
+                value={this.state.uplodSongData.musicLink}
+                onChange={this.handleChangeFilmInputGroup}
+                className={classes.textField}
+                margin='normal'
+                variant='outlined'
+                InputLabelProps={{
+                  classes: {
+                    root: classes.cssLabel,
+                    focused: classes.cssFocused,
+                  },
+                }}
+                InputProps={{
+                  classes: {
+                    root: classes.cssOutlinedInput,
+                    focused: classes.cssFocused,
+                    notchedOutline: classes.notchedOutline,
+                  },
+                }}
+              />
+
+              <Grid item xs>
+                <Button variant='contained' onClick={this.handleButtonConfirmAttatchSong} className={classes.Kirim}>
+                  <div>Attatch</div>
+                </Button>
+              </Grid>
+            </div>
+          </Fade>
+        </Modal>
+        {/* MODAL ADD ATTACHMENT THUMBNAIL END*/}
       </div>
     );
   }
@@ -436,9 +586,8 @@ class addSong extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    getDataTypesReducer: state.getDataTypesReducer,
-    PostDataArtistReducer: state.PostDataArtistReducer,
+    getDataArtistReducer: state.getDataArtistReducer,
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { getDataTypesAction, PostDataArtistAction }))(addSong);
+export default compose(withStyles(styles), connect(mapStateToProps, { getDataArtistAction }))(addSong);
