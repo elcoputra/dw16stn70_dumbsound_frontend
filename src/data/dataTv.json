@@ -1,0 +1,219 @@
+[
+  {
+    "id": 1,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/y3WDY0h.png",
+    "linkTrailer": "https://gdurl.com/aciA",
+    "thumbnailTrailer":"https://i.imgur.com/sLtqnSk.jpg",
+    "title": "The Witcher",
+    "year": 2019,
+    "description": "It is based on the book series of the same name by Polish writer Andrzej Sapkowski. The Witcher follows the story of Geralt of Rivia, a solitary monster hunter, who struggles to find his place in a world where people often prove more wicked than monsters and beasts.",
+    "thumbnailFilm" : "https://i.imgur.com/SIuUBs2.jpg",
+    "type": "Tv Series",
+    "episode":{
+      "1":"https://www.youtube.com/watch?v=ehjJ614QfeM&t=37s",
+      "2":"https://www.youtube.com/watch?v=c0i88t0Kacs",
+      "3":"https://www.youtube.com/watch?v=WwCXw8m0PHI",
+      "4":"https://www.youtube.com/watch?v=y991Ukv8NYY",
+      "5":"https://www.youtube.com/watch?v=KivD4ny-trQ"
+    }
+  },
+  {
+    "id": 2,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/Fi9yNLu.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Persona 3 The Movie",
+    "year": 2016,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 3,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/MsCpR19.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Game Of Thrones",
+    "year": 2011,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 4,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/Hy0kOeF.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Money Heist",
+    "year": 2017,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 5,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/xwb4md2.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Touch",
+    "year": 2020,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 6,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/IlUBhLG.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Arrow",
+    "year": 2020,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 7,
+    "category": "null",
+    "thumbnail": "https://imgur.com/Q8PZWEp.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "You",
+    "year": 2018,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 8,
+    "category": "null",
+    "thumbnail": "https://imgur.com/wJER8FP.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Castlevania",
+    "year": 2017,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 9,
+    "category": "null",
+    "thumbnail": "https://imgur.com/ihFDUKT.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "The OA",
+    "year": 2016,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 10,
+    "category": "null",
+    "thumbnail": "https://imgur.com/J7QAQ6Z.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Locke & Key",
+    "year": 2020,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  },
+  {
+    "id": 11,
+    "category": "null",
+    "thumbnail": "https://imgur.com/QM6oBTG.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Replay 1988",
+    "year": 2015,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":[
+      {"1":"Link1"},
+      {"2":"Link2"},
+      {"3":"Link3"},
+      {"4":"Link4"},
+      {"5":"Link5"}
+    ]
+  },
+  {
+    "id": 12,
+    "category": "null",
+    "thumbnail": "https://i.imgur.com/YhbdPmy.png",
+    "thumbnailTrailer":"https://i.ytimg.com/vi/sjOggd_wx6U/maxresdefault.jpg",
+    "linkTrailer": "https://gdurl.com/q5qo",
+    "title": "Panji Manusia Melenium",
+    "year": 1999,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis in ultricies urna, at placerat nisl. Ut ultrices ipsum ut nisi rutrum sodales et non augue. Proin tincidunt neque et fringilla ornare. Curabitur nec neque eu mauris imperdiet interdum eget dictum dui. Maecenas odio sem, vestibulum at auctor ut, gravida et tortor. Fusce tempor sagittis imperdiet.",
+    "type": "Tv Series",
+    "episode":{
+      "1":"Link1",
+      "2":"Link2",
+      "3":"Link3",
+      "4":"Link4",
+      "5":"Link5"
+    }
+  }
+]
