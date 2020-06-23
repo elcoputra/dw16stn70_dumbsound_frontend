@@ -5,6 +5,9 @@ import {
   POST_SONGS_REQUEST,
   POST_SONGS_SUCCSESS,
   POST_SONGS_ERROR,
+  GET_DETAIL_SONG_ERROR,
+  GET_DETAIL_SONG_REQUEST,
+  GET_DETAIL_SONG_SUCCSESS,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -33,6 +36,22 @@ export function postDataSongsAction(dataSong) {
       .catch((response) =>
         dispatch({
           type: POST_SONGS_ERROR,
+          payload: response.error,
+        }),
+      );
+  };
+}
+
+export function getDetailSongAction(id) {
+  return function (dispatch) {
+    dispatch({
+      type: GET_DETAIL_SONG_REQUEST,
+    });
+    API.get('/song' + id)
+      .then((response) => dispatch({ type: GET_DETAIL_SONG_SUCCSESS, payload: response.data.data }))
+      .catch((response) =>
+        dispatch({
+          type: GET_DETAIL_SONG_ERROR,
           payload: response.error,
         }),
       );

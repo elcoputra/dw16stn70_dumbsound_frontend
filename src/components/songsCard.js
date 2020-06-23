@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 // import { getDataTv, getDetailMovie } from '../redux/actions/movie_action';
 // import { getDataEpisodes } from '../redux/actions/episode_action';
-import { getDataSongsAction } from '../redux/actions/song_actions';
+import { getDataSongsAction, getDetailSongAction } from '../redux/actions/song_actions';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
@@ -150,7 +150,10 @@ class songsCard extends Component {
                     <div className={classes.Div}>
                       <Grid item xs>
                         <Card classes={{ root: classes.rootCard }} className={classes.Card}>
-                          <CardActionArea className={classes.CardActionArea}>
+                          <CardActionArea
+                            onClick={() => this.props.getDetailSongAction(detailData.id)}
+                            className={classes.CardActionArea}
+                          >
                             <Link className={classes.Link}>
                               <img src={detailData.thumbnailLink} alt='asdawda' className={classes.Img} />
                               <Grid container direction='row' justify='space-around' alignItems='center'>
@@ -186,7 +189,7 @@ const mapStateToProps = (state) => {
     getDataSongsReducer: state.getDataSongsReducer,
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, { getDataSongsAction }))(songsCard);
+export default compose(withStyles(styles), connect(mapStateToProps, { getDataSongsAction, getDetailSongAction }))(songsCard);
 
 // TUT memakai map
 // {DataTv.map((detailData, index) => {

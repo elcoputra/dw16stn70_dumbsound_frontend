@@ -5,29 +5,12 @@ import { modalRegisterReducer, modalLoginReducer } from '../reducers/modal_reduc
 import { userReducer } from '../reducers/account_reducer';
 import { authReducer } from '../reducers/auth_reducer';
 import { upgradeReducer } from '../reducers/upgrade_reducer';
-import { getDataSongsReducer, postDataSongsReducer } from '../reducers/song_reducers';
+import { getDataSongsReducer, postDataSongsReducer, getDetailSongReducer } from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
 import { PostDataArtistReducer, getDataArtistReducer } from '../reducers/arist_reducers';
 
-// // OTW DI HAPUS
-// import { movieReducer, tvReducer, addMovieReducer, detailMovieReducer, addEpisode } from '../reducers/movie_reducer';
-// import { episodeReducer, episodeAddReducer } from '../reducers/episode_reducer';
-// import { categoriesReducer } from '../reducers/categories_reducer';
-// global reducer combine
 const reducers = combineReducers({
-  // // # OTW DI HAPUS
-  // modalAddEpisodeReducer,
-  // movieReducer,
-  // tvReducer,
-  // detailMovieReducer,
-  // episodeReducer,
-
-  // addEpisode,
-  // categoriesReducer,
-  // addMovieReducer,
-  // episodeAddReducer,
-  // // ### OTW DI HAPUS
   transactionsReducer,
   transactionByIdReducer,
   modalRegisterReducer,
@@ -46,6 +29,7 @@ const reducers = combineReducers({
   // artist
   PostDataArtistReducer,
   getDataArtistReducer,
+  getDetailSongReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

@@ -5,6 +5,9 @@ import {
   POST_SONGS_REQUEST,
   POST_SONGS_SUCCSESS,
   POST_SONGS_ERROR,
+  GET_DETAIL_SONG_ERROR,
+  GET_DETAIL_SONG_REQUEST,
+  GET_DETAIL_SONG_SUCCSESS,
 } from '../actionTypes';
 
 const initialstateSongs = {
@@ -61,6 +64,36 @@ export const postDataSongsReducer = (state = initialstatePostSong, action) => {
         ...state,
         loadingAddSong: false,
         errorAddSong: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+const initialstateDetailSong = {
+  song: {},
+  loadingDetail: false,
+  errorDetail: [],
+};
+
+export const getDetailSongReducer = (state = initialstateDetailSong, action) => {
+  switch (action.type) {
+    case GET_DETAIL_SONG_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_DETAIL_SONG_SUCCSESS:
+      return {
+        ...state,
+        loading: false,
+        songs: action.payload,
+      };
+    case GET_DETAIL_SONG_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;
