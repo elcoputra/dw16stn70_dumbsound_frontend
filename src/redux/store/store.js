@@ -5,7 +5,7 @@ import { modalRegisterReducer, modalLoginReducer } from '../reducers/modal_reduc
 import { userReducer } from '../reducers/account_reducer';
 import { authReducer } from '../reducers/auth_reducer';
 import { upgradeReducer } from '../reducers/upgrade_reducer';
-import { getDataSongsReducer } from '../reducers/song_reducers';
+import { getDataSongsReducer, postDataSongsReducer } from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
 import { PostDataArtistReducer, getDataArtistReducer } from '../reducers/arist_reducers';
@@ -38,6 +38,7 @@ const reducers = combineReducers({
 
   // song
   getDataSongsReducer,
+  postDataSongsReducer,
 
   // type
   getDataTypesReducer,

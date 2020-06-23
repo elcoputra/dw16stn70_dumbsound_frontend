@@ -1,9 +1,16 @@
-import { GET_SONGS_ERROR, GET_SONGS_REQUEST, GET_SONGS_SUCCSESS } from '../actionTypes';
+import {
+  GET_SONGS_ERROR,
+  GET_SONGS_REQUEST,
+  GET_SONGS_SUCCSESS,
+  POST_SONGS_REQUEST,
+  POST_SONGS_SUCCSESS,
+  POST_SONGS_ERROR,
+} from '../actionTypes';
 
 const initialstateSongs = {
   songs: [],
   loading: false,
-  error: '',
+  error: [],
 };
 
 export const getDataSongsReducer = (state = initialstateSongs, action) => {
@@ -24,6 +31,36 @@ export const getDataSongsReducer = (state = initialstateSongs, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+const initialstatePostSong = {
+  messageAddSong: '',
+  loadingAddSong: false,
+  errorAddSong: [],
+};
+
+export const postDataSongsReducer = (state = initialstatePostSong, action) => {
+  switch (action.type) {
+    case POST_SONGS_REQUEST:
+      return {
+        ...state,
+        loadingAddSong: true,
+      };
+    case POST_SONGS_SUCCSESS:
+      return {
+        ...state,
+        loadingAddSong: false,
+        messageAddSong: action.payload,
+      };
+    case POST_SONGS_ERROR:
+      return {
+        ...state,
+        loadingAddSong: false,
+        errorAddSong: action.payload,
       };
     default:
       return state;

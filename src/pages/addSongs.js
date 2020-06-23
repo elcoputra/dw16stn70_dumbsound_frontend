@@ -4,6 +4,7 @@ import { Modal, Backdrop, Fade, TextField, Grid, Button, FormControl, InputLabel
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getDataArtistAction } from '../redux/actions/artist_action';
+import { postDataSongsAction } from '../redux/actions/song_actions';
 import { AttachFile } from '@material-ui/icons';
 
 const styles = (theme) => ({
@@ -269,7 +270,7 @@ class addSong extends Component {
     this.props.getDataArtistAction();
   }
 
-  handleChangeArtistInputGroup = (event) => {
+  handleChangeSongInputGroup = (event) => {
     const { uplodSongData } = this.state;
     this.setState({
       uplodSongData: { ...uplodSongData, [event.target.name]: event.target.value },
@@ -327,7 +328,7 @@ class addSong extends Component {
   }
   handleSubmit = () => {
     const { uplodSongData } = this.state;
-    this.props.PostDataArtistAction(uplodSongData);
+    this.props.postDataSongsAction(uplodSongData);
   };
 
   // REUSABLE ADD EPISODE COMPONENT END
@@ -335,6 +336,7 @@ class addSong extends Component {
   render(props) {
     const { classes } = this.props;
     const { artistData, loadingGetArtist, errorGetArtist } = this.props.getDataArtistReducer;
+    const { messageAddSong, loadingAddSong, errorAddSong } = this.props.postDataSongsReducer;
     return (
       <div className={classes.divBase}>
         <div className={classes.divider} />
@@ -347,10 +349,14 @@ class addSong extends Component {
             </Grid>
           </Grid>
           <Grid item xs>
-            {/* <div className={classes.succsessMessage}>{artistsMessage}</div> */}
+            {loadingAddSong ? (
+              <div className={classes.succsessMessage}>Loading. . .</div>
+            ) : (
+              <div className={classes.succsessMessage}>{messageAddSong}</div>
+            )}
           </Grid>
           <Grid item xs>
-            <div className={classes.errorMessage}>{errorGetArtist}</div>
+            <div className={classes.errorMessage}>{errorAddSong}</div>
           </Grid>
           <Grid item xs>
             <Grid container direction='row' justify='flex-start' alignItems='center'>
@@ -360,7 +366,7 @@ class addSong extends Component {
                   label='Title'
                   name='title'
                   value={this.state.uplodSongData.title}
-                  onChange={this.handleChangeFilmInputGroup}
+                  onChange={this.handleChangeSongInputGroup}
                   className={classes.textField}
                   margin='normal'
                   variant='outlined'
@@ -402,7 +408,7 @@ class addSong extends Component {
               label='Year'
               name='year'
               value={this.state.uplodSongData.year}
-              onChange={this.handleChangeArtistInputGroup}
+              onChange={this.handleChangeSongInputGroup}
               type='number'
               className={classes.textField2}
               margin='normal'
@@ -436,7 +442,7 @@ class addSong extends Component {
                   name='artistId'
                   label='Type'
                   value={this.state.uplodSongData.artistId}
-                  onChange={this.handleChangeArtistInputGroup}
+                  onChange={this.handleChangeSongInputGroup}
                   className={classes.select}
                   inputProps={{
                     classes: {
@@ -498,7 +504,7 @@ class addSong extends Component {
                 label='Cover Music'
                 name='thumbnailLink'
                 value={this.state.uplodSongData.thumbnailLink}
-                onChange={this.handleChangeFilmInputGroup}
+                onChange={this.handleChangeSongInputGroup}
                 className={classes.textField}
                 margin='normal'
                 variant='outlined'
@@ -527,7 +533,7 @@ class addSong extends Component {
         </Modal>
         {/* MODAL ADD ATTACHMENT THUMBNAIL END*/}
 
-        {/* MODAL ADD ATTACHMENT THUMBNAIL */}
+        {/* MODAL ADD ATTACHMENT SONG */}
         <Modal
           aria-labelledby='transition-modal-title'
           aria-describedby='transition-modal-description'
@@ -551,7 +557,7 @@ class addSong extends Component {
                 label='Song Link'
                 name='musicLink'
                 value={this.state.uplodSongData.musicLink}
-                onChange={this.handleChangeFilmInputGroup}
+                onChange={this.handleChangeSongInputGroup}
                 className={classes.textField}
                 margin='normal'
                 variant='outlined'
@@ -578,7 +584,7 @@ class addSong extends Component {
             </div>
           </Fade>
         </Modal>
-        {/* MODAL ADD ATTACHMENT THUMBNAIL END*/}
+        {/* MODAL ADD ATTACHMENT SONG END*/}
       </div>
     );
   }
@@ -587,7 +593,8 @@ class addSong extends Component {
 const mapStateToProps = (state) => {
   return {
     getDataArtistReducer: state.getDataArtistReducer,
+    postDataSongsReducer: state.postDataSongsReducer,
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { getDataArtistAction }))(addSong);
+export default compose(withStyles(styles), connect(mapStateToProps, { getDataArtistAction, postDataSongsAction }))(addSong);
