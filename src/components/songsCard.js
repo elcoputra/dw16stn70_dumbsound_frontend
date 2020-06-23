@@ -4,10 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 // import { getDataTv, getDetailMovie } from '../redux/actions/movie_action';
 // import { getDataEpisodes } from '../redux/actions/episode_action';
+import { getDataSongsAction } from '../redux/actions/song_actions';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 const styles = (theme) => ({
+  rootCard: {
+    borderRadius: 10,
+    backgroundColor: 'transparent',
+  },
   title: {
     color: 'white',
     fontSize: '24px',
@@ -25,8 +30,10 @@ const styles = (theme) => ({
   },
   card: {
     maxWidth: '200px',
-    backgroundColor: 'black',
-    color: 'black',
+    borderRadius: 10,
+    width: 192,
+    // backgroundColor: 'black',
+    // color: 'black',
   },
   //   CardMedia: {
   //     width: "100%",
@@ -37,29 +44,34 @@ const styles = (theme) => ({
   //     minHeight: "300px",
   //   },
   Img: {
-    maxWidth: '200px',
-    minWidth: '200px',
-    maxHeight: '300px',
-    minHeight: '300px',
+    maxWidth: 165,
+    minWidth: 165,
+    maxHeight: 152,
+    minHeight: 152,
     objectFit: 'cover',
     objectPosition: 'center',
+    marginTop: 13,
   },
   CardActionArea: {
     maxWidth: '200px',
-    backgroundColor: '#000000',
-    color: '#000000',
+    backgroundColor: '#3a3a3a',
+    // color: '#000000',
+    width: 192,
+    display: 'flex',
+
+    borderRadius: 10,
   },
   TypographyTitle: {
     maxWidth: '200px',
     fontWeight: 'bold',
     color: 'white',
-    backgroundColor: '#000000',
+    backgroundColor: '#3a3a3a',
     marginTop: '4px',
   },
   TypographyYear: {
     maxWidth: '200px',
     color: '#929292',
-    backgroundColor: '#000000',
+    backgroundColor: '#3a3a3a',
     fontSize: '14px',
     marginTop: '4px',
   },
@@ -79,7 +91,8 @@ class songsCard extends Component {
     };
   }
   componentDidMount() {
-    // this.props.getDataTv();
+    this.props.getDataSongsAction();
+    console.log(this.props.getDataSongsReducer.songs);
     // const isAdmin = localStorage.getItem('isAdmin');
     // if (isAdmin === 'true') {
     //   this.setState({
@@ -97,10 +110,10 @@ class songsCard extends Component {
 
   render(props) {
     const { classes } = this.props;
-    const { dataTvSeries, loadingTV, errorTV } = this.props.dataTv;
+    const { songs, loading } = this.props.getDataSongsReducer;
     return (
       <div>
-        {loadingTV ? (
+        {loading ? (
           <div style={{ color: 'white' }}>loading...</div>
         ) : (
           <Grid className={classes.gridBase} container direction='column' justify='flex-start' alignItems='flex-start'>
@@ -113,24 +126,14 @@ class songsCard extends Component {
                 justify='flex-start'
                 alignItems='flex-start'
               >
-                {dataTvSeries.slice(this.props.init, this.props.end).map((detailData) => {
+                {songs.slice(this.props.init, this.props.end).map((detailData) => {
                   return (
                     <div className={classes.Div}>
                       <Grid item xs>
-                        <Card className={classes.Card}>
+                        <Card classes={{ root: classes.rootCard }} className={classes.Card}>
                           <CardActionArea className={classes.CardActionArea}>
-                            <Link
-                              className={classes.Link}
-                              onClick={() => {
-                                this.props.getDetailMovie(detailData.id);
-                                this.props.getDataEpisodes(detailData.id);
-                              }}
-                              to={{
-                                pathname: `/detail`,
-                                // pathname: `/Detail/${detailData.id}/${detailData.title}`,
-                              }}
-                            >
-                              <img src={detailData.thumbnail} alt='asdawda' className={classes.Img} />
+                            <Link className={classes.Link}>
+                              <img src={detailData.thumbnailLink} alt='asdawda' className={classes.Img} />
                               <Typography className={classes.TypographyTitle}>{detailData.title}</Typography>
                               <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
                             </Link>
@@ -150,10 +153,10 @@ class songsCard extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    dataTv: state.tvReducer,
+    getDataSongsReducer: state.getDataSongsReducer,
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, {}))(songsCard);
+export default compose(withStyles(styles), connect(mapStateToProps, { getDataSongsAction }))(songsCard);
 
 // TUT memakai map
 // {DataTv.map((detailData, index) => {
