@@ -8,6 +8,7 @@ import {
   GET_DETAIL_SONG_ERROR,
   GET_DETAIL_SONG_REQUEST,
   GET_DETAIL_SONG_SUCCSESS,
+  CLEAR_DETAIL_SONG_SUCCSESS,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -55,5 +56,12 @@ export function getDetailSongAction(id) {
           payload: response.error,
         }),
       );
+  };
+}
+export function clearPlaylist(id) {
+  return function (dispatch) {
+    dispatch({
+      type: CLEAR_DETAIL_SONG_SUCCSESS,
+    });
   };
 }

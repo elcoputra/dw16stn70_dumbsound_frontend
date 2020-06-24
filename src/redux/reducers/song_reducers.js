@@ -85,7 +85,6 @@ export const getDetailSongReducer = (state = initialstateDetailSong, action) => 
         loading: true,
       };
     case GET_DETAIL_SONG_SUCCSESS:
-      console.log(state.song);
       const detail = action.payload;
       return {
         ...state,

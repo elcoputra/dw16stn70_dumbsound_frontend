@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Avatar, Grid, Typography } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import { clearPlaylist } from '../redux/actions/song_actions';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
 
@@ -34,6 +35,12 @@ class musicPlayer extends Component {
       musicPlayerShow: true,
     };
   }
+  onAudioListsChange = (currentPlayId, audioLists, audioInfo) => {
+    // kalo playlist kosong, jalanin action kosongin juga reducer state
+    if (audioLists.length === 0) {
+      this.props.clearPlaylist();
+    }
+  };
   render() {
     const { classes } = this.props;
     const { song } = this.props.getDetailSongReducer;
@@ -50,7 +57,13 @@ class musicPlayer extends Component {
             showThemeSwitch={false}
             toggleMode={false}
             audioLists={song}
+            showProgressLoadBar={true}
+            // clear playlist dan ganti dengan playlist yang update dari redux
             clearPriorAudioLists={true}
+            // kasih caback data dari player
+            onAudioListsChange={(currentPlayId, audioLists, audioInfo) =>
+              this.onAudioListsChange(currentPlayId, audioLists, audioInfo)
+            }
           />
         ) : null}
       </div>
@@ -63,4 +76,4 @@ const mapStateToProps = (state) => {
     authReducer: state.authReducer,
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, null))(musicPlayer);
+export default compose(withStyles(styles), connect(mapStateToProps, { clearPlaylist }))(musicPlayer);
