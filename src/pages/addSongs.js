@@ -475,7 +475,7 @@ class addSong extends Component {
           <Grid item xs>
             <Grid item>
               <Button variant='contained' onClick={this.handleSubmit} className={classes.ButtonSave}>
-                Add Artist
+                Add Song
               </Button>
             </Grid>
           </Grid>

@@ -5,16 +5,11 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Navbar from './components/nav';
 import MusicPlayer from './components/musicPlayer';
 import Home from './pages/Home';
-import TVShows from './pages/TvShowsPage';
-import Movies from './pages/MoviesPage';
-import DetailPlayer from './pages/detailPlayer';
 import Profile from './pages/profilePage';
 import Upgrade from './pages/upgradePage';
 import AddArtist from './pages/addArtist';
 import AddSong from './pages/addSongs';
-import ListFilm from './pages/listFilm';
 import Transaction from './pages/transactionPage';
-import learn from './pages/learnREDUX';
 import { authAction } from './redux/actions/auth_action';
 import { connect } from 'react-redux';
 
