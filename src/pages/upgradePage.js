@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { upgradeAction } from '../redux/actions/upgrade_action';
+import ReactJkMusicPlayer from 'react-jinke-music-player';
+import 'react-jinke-music-player/assets/index.css';
 
 import { Redirect } from 'react-router-dom';
 
@@ -176,12 +178,12 @@ class upgradePage extends Component {
           </Grid>
           <Grid item xs>
             <div className={classes.deskripsi}>
-              Bayar sekarang dan nikmati streaming film-film yang kekinian dari <b className={classes.dumbflix}>DUMBFLIX</b>
+              Bayar sekarang dan nikmati streaming music yang kekinian dari <b className={classes.dumbflix}>DUMBSOUND</b>
             </div>
           </Grid>
           <Grid item xs>
             <div>
-              <b className={classes.dumbflix}>DUMBFLIX</b>
+              <b className={classes.dumbflix}>DUMBSOUND</b>
               <b className={classes.rekening}> : 0981312323</b>
             </div>
           </Grid>

@@ -6,7 +6,7 @@ import LoginModal from './loginModal';
 import RegisterModal from './registerModal';
 import { Link } from 'react-router-dom';
 import Segitiga from '../img/decor/segitiga.png';
-import { PersonOutline, Payment, ExitToApp, Movie, Receipt } from '@material-ui/icons';
+import { PersonOutline, Payment, ExitToApp, Movie, Receipt, Album, EmojiPeople } from '@material-ui/icons';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { openModalRegister, openModalLogin } from '../redux/actions/modal_actions';
@@ -38,9 +38,9 @@ const styles = (theme) => ({
     backgroundColor: '#1F1F1F',
     position: 'absolute',
     top: '36px',
-    left: '-155%',
-    width: 178,
-    height: '180px',
+    left: '-187%',
+    width: 200,
+    height: '201',
     borderRadius: '10px',
   },
   AppBar: {
@@ -105,7 +105,7 @@ const styles = (theme) => ({
     paddingRight: 90,
   },
   borderMenuDropdown: {
-    width: 178,
+    width: 200,
     height: 2,
     backgroundColor: 'gray',
   },
@@ -121,11 +121,21 @@ const styles = (theme) => ({
     width: 220,
     paddingRight: 67,
   },
+  buttonMenuAdmin: {
+    width: 256,
+    paddingRight: 67,
+  },
   imgLogo: {
     height: 40,
   },
   divRoot: {
     background: 'transparent',
+  },
+  divSpacerMenuAddArtist: {
+    width: 34,
+  },
+  divSpacerMenuAddSong: {
+    width: 48,
   },
 });
 
@@ -164,25 +174,6 @@ class nav extends Component {
       });
     }
   }
-
-  // loginModalRef = ({ handleOpenLogin }) => {
-  //   this.showModalLogin = handleOpenLogin;
-  // };
-  // RegisterModalRef = ({ handleOpenRegister }) => {
-  //   this.showModalRegister = handleOpenRegister;
-  // };
-
-  // onLoginClick = () => {
-  //   this.showModalLogin();
-  // };
-  // onRegisterClick = () => {
-  //   this.showModalRegister();
-  // };
-  // getDataFromModalComponent = (isLoginFromLoginModal) => {
-  //   this.setState({
-  //     isLogin: isLoginFromLoginModal,
-  //   });
-  // };
 
   dropdownMenu = () => {
     if (this.state.isMenu === false) {
@@ -362,16 +353,24 @@ class nav extends Component {
                         <img src={Segitiga} alt='segitiga' />
                       </div>
                       <div className={classes.divBaseFloatingMenuAdmin}>
-                        <Link className={classes.Link} to='/movies'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuFilm}>
-                            <Movie className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Film</b>
+                        <Link className={classes.Link} to='/add-artist'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
+                            <EmojiPeople className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Add Artist</b>
+                            <div className={classes.divSpacerMenuAddArtist} />
+                          </Button>
+                        </Link>
+                        <Link className={classes.Link} to='/add-song'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
+                            <Album className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Add Song</b>
+                            <div className={classes.divSpacerMenuAddSong} />
                           </Button>
                         </Link>
                         <Link className={classes.Link} to='/transactions'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuReceipt}>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
                             <Receipt className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Trans</b>
+                            <b className={classes.LabelMenu}>Transactions</b>
                           </Button>
                         </Link>
                         <Button className={classes.buttonMenuPay}></Button>

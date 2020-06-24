@@ -47,8 +47,8 @@ export function getDetailSongAction(id) {
     dispatch({
       type: GET_DETAIL_SONG_REQUEST,
     });
-    API.get('/song' + id)
-      .then((response) => dispatch({ type: GET_DETAIL_SONG_SUCCSESS, payload: response.data.data }))
+    API.get('/song/' + id)
+      .then((response) => dispatch({ type: GET_DETAIL_SONG_SUCCSESS, id: response.data.data.id, payload: response.data.data }))
       .catch((response) =>
         dispatch({
           type: GET_DETAIL_SONG_ERROR,

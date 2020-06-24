@@ -84,7 +84,7 @@ class registerModal extends Component {
     this.state = {
       open: false,
       data: {},
-      user: {},
+      user: { isAdmin: false },
     };
   }
   handleOpenRegister = () => {

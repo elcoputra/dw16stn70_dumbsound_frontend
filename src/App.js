@@ -46,8 +46,8 @@ class App extends Component {
           <Navbar />
           <Switch>
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
-            <Route path='/add-artist' component={AddArtist} />
-            <Route path='/add-song' component={AddSong} />
+            <PrivateRouteAdmin path='/add-artist' component={AddArtist} />
+            <PrivateRouteAdmin path='/add-song' component={AddSong} />
             <PrivateRouteUser path='/upgrade' component={Upgrade} />
             <PrivateRouteUser path='/profile' component={Profile} />
             <Route path='/' component={Home} />

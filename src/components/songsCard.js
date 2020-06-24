@@ -187,6 +187,7 @@ class songsCard extends Component {
 const mapStateToProps = (state) => {
   return {
     getDataSongsReducer: state.getDataSongsReducer,
+    authReducer: state.authReducer,
   };
 };
 export default compose(withStyles(styles), connect(mapStateToProps, { getDataSongsAction, getDetailSongAction }))(songsCard);

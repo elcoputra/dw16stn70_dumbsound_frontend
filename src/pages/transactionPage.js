@@ -44,7 +44,7 @@ const StyledTableRow = withStyles((theme) => ({
 const styles = (theme) => ({
   table: {
     width: 1000,
-    background: '#000000',
+    background: '#161616',
   },
   divider: {
     height: 100,

@@ -8,6 +8,7 @@ import {
   GET_DETAIL_SONG_ERROR,
   GET_DETAIL_SONG_REQUEST,
   GET_DETAIL_SONG_SUCCSESS,
+  CLEAR_DETAIL_SONG_SUCCSESS,
 } from '../actionTypes';
 
 const initialstateSongs = {
@@ -71,7 +72,7 @@ export const postDataSongsReducer = (state = initialstatePostSong, action) => {
 };
 
 const initialstateDetailSong = {
-  song: {},
+  song: [],
   loadingDetail: false,
   errorDetail: [],
 };
@@ -84,16 +85,31 @@ export const getDetailSongReducer = (state = initialstateDetailSong, action) => 
         loading: true,
       };
     case GET_DETAIL_SONG_SUCCSESS:
+      console.log(state.song);
+      const detail = action.payload;
       return {
         ...state,
         loading: false,
-        songs: action.payload,
+        song: [
+          ...state.song,
+          {
+            name: detail.title,
+            musicSrc: detail.musicLink,
+            cover: detail.thumbnailLink,
+            singer: detail.artist.name,
+          },
+        ],
       };
     case GET_DETAIL_SONG_ERROR:
       return {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case CLEAR_DETAIL_SONG_SUCCSESS:
+      return {
+        ...state,
+        song: [],
       };
     default:
       return state;
