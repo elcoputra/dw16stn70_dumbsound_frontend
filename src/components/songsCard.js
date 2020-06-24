@@ -125,6 +125,7 @@ class songsCard extends Component {
   render(props) {
     const { classes } = this.props;
     const { songs, loading } = this.props.getDataSongsReducer;
+    const { userState } = this.props.authReducer;
     return (
       <div>
         {loading ? (
@@ -151,7 +152,11 @@ class songsCard extends Component {
                       <Grid item xs>
                         <Card classes={{ root: classes.rootCard }} className={classes.Card}>
                           <CardActionArea
-                            onClick={() => this.props.getDetailSongAction(detailData.id)}
+                            onClick={
+                              userState.isAdmin || userState.subscribe
+                                ? () => this.props.getDetailSongAction(detailData.id)
+                                : null
+                            }
                             className={classes.CardActionArea}
                           >
                             <Link className={classes.Link}>

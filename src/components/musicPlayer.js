@@ -33,6 +33,8 @@ class musicPlayer extends Component {
     super(props);
     this.state = {
       musicPlayerShow: true,
+      // data index playlist paling akhir
+      playIndex: 0,
     };
   }
   onAudioListsChange = (currentPlayId, audioLists, audioInfo) => {
@@ -40,6 +42,9 @@ class musicPlayer extends Component {
     if (audioLists.length === 0) {
       this.props.clearPlaylist();
     }
+    this.setState({
+      playIndex: audioLists.length - 1,
+    });
   };
   render() {
     const { classes } = this.props;
@@ -64,6 +69,8 @@ class musicPlayer extends Component {
             onAudioListsChange={(currentPlayId, audioLists, audioInfo) =>
               this.onAudioListsChange(currentPlayId, audioLists, audioInfo)
             }
+            // memainkan musik dari index yang baru di tambahkan
+            playIndex={this.state.playIndex}
           />
         ) : null}
       </div>
