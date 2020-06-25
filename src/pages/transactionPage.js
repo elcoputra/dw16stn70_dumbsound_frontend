@@ -146,6 +146,9 @@ class transactionPage extends Component {
   render() {
     const { classes } = this.props;
     const { dataTransactions, loadingTransactions, errorTransactions } = this.props.transactionsReducer;
+    let startDate = new Date();
+    let dueDate = Moment(startDate);
+    dueDate.add(1, 'months');
     return (
       <div>
         <Grid container direction='column' justify='center' alignItems='center'>
@@ -217,7 +220,11 @@ class transactionPage extends Component {
                             <Button
                               onClick={() => {
                                 this.openDropdown(row.id);
-                                this.props.UpdateDataTransactionsAction(row.id, { status: 'Approved', userId: row.userId });
+                                this.props.UpdateDataTransactionsAction(row.id, {
+                                  status: 'Approved',
+                                  userId: row.userId,
+                                  dueDate: dueDate,
+                                });
                               }}
                               className={classes.ButtonApproved}
                             >
