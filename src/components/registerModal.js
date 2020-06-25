@@ -14,7 +14,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { closeModalRegister } from '../redux/actions/modal_actions';
-import { registerAction } from '../redux/actions/account_action';
+import { registerAction, clearError } from '../redux/actions/account_action';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -23,9 +23,7 @@ const styles = (theme) => ({
   // DROPDOWN
   formControl: {
     marginTop: 15,
-    marginBottom: 15,
-    marginLeft: 5,
-    height: 50,
+    marginBottom: 10,
     width: 350,
     border: '2px solid white',
     fontColor: 'white',
@@ -162,7 +160,7 @@ class registerModal extends Component {
     this.state = {
       open: false,
       data: {},
-      user: { isAdmin: false },
+      user: { isAdmin: false, gender: 'Male' },
     };
   }
   handleOpenRegister = () => {
@@ -183,24 +181,19 @@ class registerModal extends Component {
   handleSubmitRegister = async (event) => {
     this.props.registerAction(this.state.user);
     this.setState({
-      user: {},
+      user: { isAdmin: false, gender: 'Male' },
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { error, isLogin } = this.props.userReducer;
     const { userState, loading } = this.props.authReducer;
-
-    const errorHandling = error && error.data ? error.data.error : null;
-    const errorMessageHandling = error && error.data ? error.data.message : null;
     const isSubscribeState = userState ? userState.subscribe : false;
     const isLoginState = userState ? userState.isLogin : false;
 
     if (!loading && isLoginState && !isSubscribeState) return <Redirect to='/Upgrade' />;
     return (
       <div>
-        {console.log(this.props.modalRegister)}
         <Modal
           className={classes.modal}
           open={this.props.modalRegister}
@@ -214,10 +207,6 @@ class registerModal extends Component {
           <Fade in={this.props.modalRegister}>
             <Box className={classes.Box}>
               <b className={classes.Title}>Register</b>
-              <div className={classes.errorResponse}>
-                {errorHandling}
-                {errorMessageHandling}
-              </div>
               <Grid className={classes.GridInput} container direction='column' justify='center' alignItems='center'>
                 <Grid item xs={12}>
                   <TextField
@@ -303,10 +292,9 @@ class registerModal extends Component {
                       Gender
                     </InputLabel>
                     <Select
-                      labelId='demo-simple-select-outlined-label'
-                      id='demo-simple-select-outlined'
+                      labelId='gender'
+                      id='gender'
                       name='gender'
-                      label='Gender'
                       value={this.state.user.gender}
                       onChange={this.handleChangeInput}
                       className={classes.select}
@@ -398,4 +386,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { closeModalRegister, registerAction }))(registerModal);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { clearError, closeModalRegister, registerAction }),
+)(registerModal);

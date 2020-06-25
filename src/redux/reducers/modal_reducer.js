@@ -1,11 +1,4 @@
-import {
-  OPEN_MODAL_REGISTER,
-  CLOSE_MODAL_REGISTER,
-  OPEN_MODAL_LOGIN,
-  CLOSE_MODAL_LOGIN,
-  CLOSE_MODAL_ADD_EPISODE,
-  OPEN_MODAL_ADD_EPISODE,
-} from '../actionTypes';
+import { OPEN_MODAL_REGISTER, CLOSE_MODAL_REGISTER, OPEN_MODAL_LOGIN, CLOSE_MODAL_LOGIN } from '../actionTypes';
 const initialStateRegisterModal = {
   registerModalOpen: false,
 };
@@ -34,17 +27,6 @@ export const modalLoginReducer = (state = initialStateLoginModal, action) => {
       return { ...state, loginModalOpen: action.payload };
     case CLOSE_MODAL_LOGIN:
       return { ...state, loginModalOpen: action.payload };
-    default:
-      return state;
-  }
-};
-
-export const modalAddEpisodeReducer = (state = initialStateAddEpisodeModal, action) => {
-  switch (action.type) {
-    case OPEN_MODAL_ADD_EPISODE:
-      return { ...state, addEpisodeModalOpen: action.payload };
-    case CLOSE_MODAL_ADD_EPISODE:
-      return { ...state, addEpisodeModalOpen: action.payload };
     default:
       return state;
   }

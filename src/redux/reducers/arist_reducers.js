@@ -5,15 +5,19 @@ import {
   GET_ARTIST_ERROR,
   GET_ARTIST_REQUEST,
   GET_ARTIST_SUCCSESS,
+  CLEAR_ERROR_ARTIST,
+  CLEAR_MESSAGE_ARTIST,
 } from '../actionTypes';
 
-const initialstateTypes = {
-  artistsMessage: '',
+const initialStatePost = {
   loadingArtist: false,
+  messageBoolArtist: false,
+  artistsMessage: '',
+  errorBoolArtist: false,
   errorArtist: '',
 };
 
-export const PostDataArtistReducer = (state = initialstateTypes, action) => {
+export const PostDataArtistReducer = (state = initialStatePost, action) => {
   switch (action.type) {
     case POST_ARTIST_REQUEST:
       return {
@@ -25,12 +29,26 @@ export const PostDataArtistReducer = (state = initialstateTypes, action) => {
         ...state,
         loadingArtist: false,
         artistsMessage: action.payload,
+        messageBoolArtist: true,
       };
     case POST_ARTIST_ERROR:
       return {
         ...state,
         loadingArtist: false,
         errorArtist: action.payload,
+        errorBoolArtist: true,
+      };
+    case CLEAR_ERROR_ARTIST:
+      return {
+        ...state,
+        errorBoolArtist: false,
+        errorArtist: '',
+      };
+    case CLEAR_MESSAGE_ARTIST:
+      return {
+        ...state,
+        artistsMessage: '',
+        messageBoolArtist: false,
       };
     default:
       return state;

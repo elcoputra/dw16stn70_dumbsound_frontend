@@ -10,6 +10,7 @@ import Upgrade from './pages/upgradePage';
 import AddArtist from './pages/addArtist';
 import AddSong from './pages/addSongs';
 import Transaction from './pages/transactionPage';
+import SnackBar from '../src/components/snackBar';
 import { authAction } from './redux/actions/auth_action';
 import { connect } from 'react-redux';
 
@@ -39,6 +40,7 @@ class App extends Component {
         <div>
           <CssBaseline />
           <Navbar />
+          <SnackBar />
           <Switch>
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
             <PrivateRouteAdmin path='/add-artist' component={AddArtist} />

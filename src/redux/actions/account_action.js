@@ -6,6 +6,8 @@ import {
   REGISTER_SUCCSESS,
   REGISTER_ERROR,
   CLEAR_LOGIN_DATA,
+  CLEAR_ERROR,
+  CLEAR_MESSAGE,
 } from '../actionTypes';
 import { API, setAuthToken } from '../../config/axiosConfig';
 import { closeModalLogin, closeModalRegister } from '../actions/modal_actions';
@@ -23,6 +25,7 @@ export function loginAction(input) {
           {
             type: LOGIN_SUCCSESS,
             payload: response.data.data,
+            message: response.data.message,
           },
           localStorage.setItem('token', response.data.data[0].token),
           setAuthToken(response.data.data[0].token),
@@ -50,6 +53,7 @@ export function registerAction(input) {
           {
             type: REGISTER_SUCCSESS,
             payload: response.data.data,
+            message: response.data.message,
           },
           localStorage.setItem('token', response.data.data[0].token),
           setAuthToken(response.data.data[0].token),
@@ -70,6 +74,20 @@ export function clearUserData() {
   return function (dispatch) {
     {
       dispatch({ type: CLEAR_LOGIN_DATA });
+    }
+  };
+}
+export function clearError() {
+  return function (dispatch) {
+    {
+      dispatch({ type: CLEAR_ERROR });
+    }
+  };
+}
+export function clearMessage() {
+  return function (dispatch) {
+    {
+      dispatch({ type: CLEAR_MESSAGE });
     }
   };
 }

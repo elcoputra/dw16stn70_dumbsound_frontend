@@ -31,15 +31,3 @@ export const closeModalLogin = () => {
     payload: false,
   };
 };
-export const openModalAddEpisode = () => {
-  return {
-    type: OPEN_MODAL_ADD_EPISODE,
-    payload: true,
-  };
-};
-export const closeModalAddEpisode = () => {
-  return {
-    type: CLOSE_MODAL_ADD_EPISODE,
-    payload: false,
-  };
-};

@@ -5,6 +5,8 @@ import {
   GET_ARTIST_ERROR,
   GET_ARTIST_REQUEST,
   GET_ARTIST_SUCCSESS,
+  CLEAR_ERROR_ARTIST,
+  CLEAR_MESSAGE_ARTIST,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -15,14 +17,30 @@ export function PostDataArtistAction(artistData) {
     });
     API.post('/artist', artistData)
       .then((response) => dispatch({ type: POST_ARTIST_SUCCSESS, payload: response.data.message }))
-      .catch((response) =>
+      .catch((error) =>
         dispatch({
           type: POST_ARTIST_ERROR,
-          payload: response.error,
+          payload: error.response.data.error,
         }),
       );
   };
 }
+
+export function clearErrorArtist() {
+  return function (dispatch) {
+    {
+      dispatch({ type: CLEAR_ERROR_ARTIST });
+    }
+  };
+}
+export function clearMessageArtist() {
+  return function (dispatch) {
+    {
+      dispatch({ type: CLEAR_MESSAGE_ARTIST });
+    }
+  };
+}
+
 export function getDataArtistAction() {
   return function (dispatch) {
     dispatch({

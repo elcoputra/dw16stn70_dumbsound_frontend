@@ -256,43 +256,17 @@ class addArtist extends Component {
       uploadArtistData: { ...uploadArtistData, [event.target.name]: event.target.value },
     });
   };
-  handleCloseModalAttatch = () => {
-    this.setState({
-      open: false,
-    });
-  };
-  handleButtonAttatch = () => {
-    this.setState({
-      open: true,
-    });
-  };
-  handleButtonConfirmAttatch = () => {
-    console.log(this.state.upload);
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleChange(i, e) {
-    const { name, value } = e.target;
-    let uploadEpisodes = [...this.state.uploadEpisodes];
-    uploadEpisodes[i] = { ...uploadEpisodes[i], [name]: value };
-    this.setState({ uploadEpisodes });
-  }
-  addClick() {
-    this.setState((prevState) => ({
-      uploadEpisodes: [...prevState.uploadEpisodes, { title: '', linkEpisode: '', thumbnailEpisode: '', movieId: 0 }],
-    }));
-  }
   handleSubmit = () => {
     const { uploadArtistData } = this.state;
     this.props.PostDataArtistAction(uploadArtistData);
+    this.setState({
+      uploadArtistData: {},
+    });
   };
 
   render(props) {
     const { classes } = this.props;
     const { types, loadingTypes, errorTypes } = this.props.getDataTypesReducer;
-    const { artistsMessage, errorArtist } = this.props.PostDataArtistReducer;
     return (
       <div className={classes.divBase}>
         <div className={classes.divider} />
@@ -305,17 +279,11 @@ class addArtist extends Component {
             </Grid>
           </Grid>
           <Grid item xs>
-            <div className={classes.succsessMessage}>{artistsMessage}</div>
-          </Grid>
-          <Grid item xs>
-            <div className={classes.errorMessage}>{errorArtist}</div>
-          </Grid>
-          <Grid item xs>
             <TextField
               id='standard-name'
               label='Name'
               name='name'
-              value={this.state.uploadArtistData.name}
+              value={this.state.uploadArtistData.name ? this.state.uploadArtistData.name : ''}
               onChange={this.handleChangeArtistInputGroup}
               className={classes.textField2}
               margin='normal'
@@ -342,7 +310,7 @@ class addArtist extends Component {
               id='standard-name'
               label='Old'
               name='old'
-              value={this.state.uploadArtistData.old}
+              value={this.state.uploadArtistData.old ? this.state.uploadArtistData.old : ''}
               onChange={this.handleChangeArtistInputGroup}
               type='number'
               className={classes.textField2}
@@ -376,7 +344,7 @@ class addArtist extends Component {
                   id='demo-simple-select-outlined'
                   name='typeId'
                   label='Type'
-                  value={this.state.uploadArtistData.typeId}
+                  value={this.state.uploadArtistData.typeId ? this.state.uploadArtistData.typeId : ''}
                   onChange={this.handleChangeArtistInputGroup}
                   className={classes.select}
                   inputProps={{
@@ -400,7 +368,7 @@ class addArtist extends Component {
               id='standard-name'
               label='Start A Career'
               name='startAcareer'
-              value={this.state.uploadArtistData.startAcareer}
+              value={this.state.uploadArtistData.startAcareer ? this.state.uploadArtistData.startAcareer : ''}
               onChange={this.handleChangeArtistInputGroup}
               type='number'
               className={classes.textField2}
