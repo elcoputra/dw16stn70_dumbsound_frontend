@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Trans from '../data/trans.json';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-// import Moment from 'react-moment';
+// moment adalah modul mengenawi waktu
 import Moment from 'moment';
 
 import { getDataTransactionsAction, UpdateDataTransactionsAction } from '../redux/actions/transactions_action';

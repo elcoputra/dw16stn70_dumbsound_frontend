@@ -172,7 +172,9 @@ class upgradePage extends Component {
           <Grid item xs>
             <div className={classes.errorResponse}>
               {loading == null ? null : loading ? null : 'Succsess add your transaction'}
+              <br />
               {errorHandling}
+              <br />
               {errorMessageHandling}
             </div>
           </Grid>
