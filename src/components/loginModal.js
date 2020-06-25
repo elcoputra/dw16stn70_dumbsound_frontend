@@ -93,67 +93,17 @@ class loginModal extends Component {
       token: '',
       user: {},
     };
-    // this.handleOpenLogin = this.handleOpenLogin.bind(this);
-    // this.handleCloseLogin = this.handleCloseLogin.bind(this);
-    // this.openRegister = this.openRegister.bind(this);
   }
-  componentDidMount() {
-    // const isLogin = localStorage.getItem('isLogin');
-    // if (isLogin === 'false') {
-    //   this.setState({
-    //     isLogin: false,
-    //   });
-    // }
-    // if (isLogin === 'true') {
-    //   this.setState({
-    //     isLogin: true,
-    //   });
-    // }
-  }
-  // RegisterModalRef = ({ handleOpenRegister }) => {
-  //   this.showModalRegister = handleOpenRegister;
-  // };
-  // handleOpenLogin() {
-  //   this.setState({ open: true });
-  // }
-
-  // handleCloseLogin() {
-  //   this.setState({ open: false });
-  // }
-  // openRegister() {
-  //   this.handleCloseLogin();
-  //   this.showModalRegister();
-  // }
-  // stateLogin = () => {
-  //   localStorage.setItem('isLogin', true);
-  //   localStorage.setItem('isAdmin', false);
-  //   this.getDataLocalStorage();
-  //   this.handleCloseLogin();
-  // };
+  componentDidMount() {}
   handleButtonLogin = () => {
     this.props.loginAction(this.state.user);
     this.setState({
       user: {},
     });
   };
-  // getDataLocalStorage = () => {
-  //   const isLogin = localStorage.getItem('isLogin');
-  //   if (isLogin === 'true') {
-  //     this.setState({
-  //       isLogin: true,
-  //     });
-  //   }
-  //   if (isLogin === 'false') {
-  //     this.setState({
-  //       isLogin: false,
-  //     });
-  //   }
-  //   this.props.sendDataIsLogin(true);
-  // };
   handleInputChange = (event) => {
     const { user } = this.state;
     this.setState({
-      // user: { ...user, [event.target.name]: event.target.value },
       user: { ...user, [event.target.name]: event.target.value },
     });
   };
@@ -189,6 +139,7 @@ class loginModal extends Component {
                 <b className={classes.Title}>Login</b>
                 <div className={classes.errorResponse}>
                   {errorHandling}
+                  <br />
                   {errorMessageHandling}
                 </div>
                 <Grid className={classes.GridInput} container direction='column' justify='center' alignItems='center'>

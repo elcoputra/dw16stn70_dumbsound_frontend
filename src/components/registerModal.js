@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, Backdrop, Fade, Box, Grid, TextField, Button } from '@material-ui/core';
+import {
+  Modal,
+  Backdrop,
+  Fade,
+  Box,
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 import { closeModalRegister } from '../redux/actions/modal_actions';
 import { registerAction } from '../redux/actions/account_action';
 import { compose } from 'recompose';
@@ -8,6 +20,72 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const styles = (theme) => ({
+  // DROPDOWN
+  formControl: {
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 5,
+    height: 50,
+    width: 350,
+    border: '2px solid white',
+    fontColor: 'white',
+    color: 'white',
+    backgroundColor: 'rgba(210, 210, 210, 0.25)',
+    laberColor: 'white',
+    borderRadius: 5,
+  },
+
+  dropdownStyle: {
+    border: '2px solid white',
+    backgroundColor: '#353535',
+    fontColor: 'white',
+    color: 'white',
+    laberColor: 'white',
+  },
+  InputLabel: {
+    color: 'white',
+  },
+  select: {
+    '&:before': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+      color: 'white',
+    },
+    '&:after': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+      color: 'white',
+    },
+  },
+  icon: {
+    fontSize: 40,
+    color: 'white',
+  },
+  dropdownStyle: {
+    border: '2px solid white',
+    backgroundColor: '#353535',
+    fontColor: 'white',
+    color: 'white',
+    laberColor: 'white',
+  },
+  inputProps: {
+    color: 'white',
+    '&:before': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+      color: 'white',
+    },
+    '&:after': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+      color: 'white',
+    },
+  },
+  // DROPDOWN END
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -220,29 +298,30 @@ class registerModal extends Component {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    id='standard-name'
-                    label='Gender'
-                    name='gender'
-                    value={this.state.user.gender ? this.state.user.gender : ''}
-                    onChange={this.handleChangeInput}
-                    className={classes.textField}
-                    margin='normal'
-                    variant='outlined'
-                    InputLabelProps={{
-                      classes: {
-                        root: classes.cssLabel,
-                        focused: classes.cssFocused,
-                      },
-                    }}
-                    InputProps={{
-                      classes: {
-                        root: classes.cssOutlinedInput,
-                        focused: classes.cssFocused,
-                        notchedOutline: classes.notchedOutline,
-                      },
-                    }}
-                  />
+                  <FormControl variant='outlined' className={classes.formControl}>
+                    <InputLabel className={classes.InputLabel} id='demo-simple-select-outlined-label'>
+                      Gender
+                    </InputLabel>
+                    <Select
+                      labelId='demo-simple-select-outlined-label'
+                      id='demo-simple-select-outlined'
+                      name='gender'
+                      label='Gender'
+                      value={this.state.user.gender}
+                      onChange={this.handleChangeInput}
+                      className={classes.select}
+                      inputProps={{
+                        classes: {
+                          icon: classes.icon,
+                          root: classes.inputProps,
+                        },
+                      }}
+                      MenuProps={{ classes: { paper: classes.dropdownStyle } }}
+                    >
+                      <MenuItem value='Male'>Male</MenuItem>
+                      <MenuItem value='Female'>Female</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
