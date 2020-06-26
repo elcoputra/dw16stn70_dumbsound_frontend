@@ -22,18 +22,13 @@ class App extends Component {
   render() {
     const { userState } = this.props.authReducer;
     const PrivateRouteAdmin = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (userState.isAdmin === true ? <Component {...props} /> : <Redirect to='/' />)} />
-    );
-    const PrivateRouteUser = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (userState.isLogin === true ? <Component {...props} /> : <Redirect to='/' />)} />
-    );
-    const PrivateRouteSubscribe = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
-        render={(props) =>
-          userState.isLogin === true && userState.subscribe === true ? <Component {...props} /> : <Redirect to='/upgrade' />
-        }
+        render={(props) => (userState.isAdmin && userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)}
       />
+    );
+    const PrivateRouteUser = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)} />
     );
     return (
       <Router>

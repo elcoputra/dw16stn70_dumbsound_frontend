@@ -9,6 +9,8 @@ import {
   GET_DETAIL_SONG_REQUEST,
   GET_DETAIL_SONG_SUCCSESS,
   CLEAR_DETAIL_SONG_SUCCSESS,
+  CLEAR_MESSAGE_ADD_SONG,
+  CLEAR_ERROR_ADD_SONG,
 } from '../actionTypes';
 
 const initialstateSongs = {
@@ -41,10 +43,13 @@ export const getDataSongsReducer = (state = initialstateSongs, action) => {
   }
 };
 
+// ADD SONG //
 const initialstatePostSong = {
-  messageAddSong: '',
   loadingAddSong: false,
-  errorAddSong: [],
+  messageBoolAddSong: false,
+  messageAddSong: '',
+  errorBoolAddSong: false,
+  errorAddSong: '',
 };
 
 export const postDataSongsReducer = (state = initialstatePostSong, action) => {
@@ -53,24 +58,41 @@ export const postDataSongsReducer = (state = initialstatePostSong, action) => {
       return {
         ...state,
         loadingAddSong: true,
+        messageBoolAddSong: false,
+        errorBoolAddSong: false,
       };
     case POST_SONGS_SUCCSESS:
       return {
         ...state,
         loadingAddSong: false,
+        messageBoolAddSong: true,
         messageAddSong: action.payload,
       };
     case POST_SONGS_ERROR:
       return {
         ...state,
         loadingAddSong: false,
+        errorBoolAddSong: true,
         errorAddSong: action.payload,
+      };
+    case CLEAR_MESSAGE_ADD_SONG:
+      return {
+        ...state,
+        messageBoolAddSong: false,
+        messageAddSong: '',
+      };
+    case CLEAR_ERROR_ADD_SONG:
+      return {
+        ...state,
+        errorAddSong: '',
+        errorBoolAddSong: false,
       };
     default:
       return state;
   }
 };
 
+// Get detail song //
 const initialstateDetailSong = {
   song: [],
   loadingDetail: false,

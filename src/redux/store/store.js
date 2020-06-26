@@ -19,10 +19,6 @@ const reducers = combineReducers({
   authReducer,
   upgradeReducer,
 
-  // song
-  getDataSongsReducer,
-  postDataSongsReducer,
-
   // type
   getDataTypesReducer,
 
@@ -30,6 +26,10 @@ const reducers = combineReducers({
   PostDataArtistReducer,
   getDataArtistReducer,
   getDetailSongReducer,
+
+  // song
+  getDataSongsReducer,
+  postDataSongsReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

@@ -106,20 +106,6 @@ class songsCard extends Component {
   }
   componentDidMount() {
     this.props.getDataSongsAction();
-    console.log(this.props.getDataSongsReducer.songs);
-    // const isAdmin = localStorage.getItem('isAdmin');
-    // if (isAdmin === 'true') {
-    //   this.setState({
-    //     isAdmin: true,
-    //   });
-    // }
-    // if (isAdmin === 'false') {
-    //   this.setState({
-    //     isAdmin: false,
-    //   });
-    // }
-    // console.log('didmount');
-    // console.log('Data Dari Storage' + isAdmin);
   }
 
   render(props) {

@@ -3,6 +3,7 @@ import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { clearError, clearMessage } from '../redux/actions/account_action';
 import { clearErrorArtist, clearMessageArtist } from '../redux/actions/artist_action';
+import { clearMessageAddSong, clearErrorAddSong } from '../redux/actions/song_actions';
 import { connect } from 'react-redux';
 
 class snackBar extends Component {
@@ -18,8 +19,8 @@ class snackBar extends Component {
     const errorRegister =
       error.data && error.data.error ? error.data.error : error.data && error.data.message ? error.data.message : null;
     const messageRegister = message ? message : null;
-
     const { messageBoolArtist, errorBoolArtist, artistsMessage, errorArtist } = this.props.PostDataArtistReducer;
+    const { messageBoolAddSong, messageAddSong, errorBoolAddSong, errorAddSong } = this.props.postDataSongsReducer;
     return (
       <div>
         {/* REGISTER SNACK*/}
@@ -71,6 +72,31 @@ class snackBar extends Component {
           </Alert>
         </Snackbar>
         {/* ARTIST SNACK*/}
+        {/* ////////////////////////////////////////////////////////////////// */}
+        {/* SONG SNACK*/}
+        {/* SUCCESS */}
+        <Snackbar
+          open={messageBoolAddSong}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearMessageAddSong}
+        >
+          <Alert onClose={this.props.clearMessageAddSong} severity='success'>
+            {messageAddSong ? messageAddSong : ''}
+          </Alert>
+        </Snackbar>
+        {/* ERROR */}
+        <Snackbar
+          open={errorBoolAddSong}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearErrorAddSong}
+        >
+          <Alert onClose={this.props.clearErrorAddSong} severity='error'>
+            {errorAddSong ? errorAddSong : messageAddSong ? messageAddSong : 'error'}
+          </Alert>
+        </Snackbar>
+        {/* SONG SNACK */}
       </div>
     );
   }
@@ -80,7 +106,15 @@ const mapStateToProps = (state) => {
   return {
     userReducer: state.userReducer,
     PostDataArtistReducer: state.PostDataArtistReducer,
+    postDataSongsReducer: state.postDataSongsReducer,
   };
 };
 
-export default connect(mapStateToProps, { clearError, clearMessage, clearErrorArtist, clearMessageArtist })(snackBar);
+export default connect(mapStateToProps, {
+  clearError,
+  clearMessage,
+  clearErrorArtist,
+  clearMessageArtist,
+  clearMessageAddSong,
+  clearErrorAddSong,
+})(snackBar);
