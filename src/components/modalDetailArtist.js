@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Modal, Backdrop, Fade, Box, Grid, Avatar, Typography, TextField, Button, Link } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import { clearModalArtistDetailAction } from '../redux/actions/artist_action';
 
 const styles = (theme) => ({
   modal: {
@@ -74,19 +75,20 @@ const styles = (theme) => ({
 class modalDetailArtist extends Component {
   render() {
     const { classes } = this.props;
+    const { artistDataBySong, loadingGetArtistBySong, errorGetArtistBySong, modalArtist } = this.props.getArtistBySongReducer;
     return (
       <div>
         <Modal
           className={classes.modal}
-          open={true}
-          onClose={this.props.closeModalLogin}
+          open={modalArtist}
+          onClose={this.props.clearModalArtistDetailAction}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{
             timeout: 500,
           }}
         >
-          <Fade in={true}>
+          <Fade in={modalArtist}>
             <Box className={classes.Box}>
               {/* COLOUMN UTAMA */}
               <Grid container direction='column' justify='flex-start' alignItems='stretch' className={classes.rootGrid}>
@@ -95,29 +97,27 @@ class modalDetailArtist extends Component {
                   <Grid container direction='row' justify='space-between' alignItems='flex-start' className={classes.headerInfo}>
                     {/* CIRCLE PHOTO */}
                     <Grid item xs={3}>
-                      <Avatar
-                        alt='Sayuri'
-                        src='https://cdn.myanimelist.net/images/voiceactors/1/57707.jpg'
-                        className={classes.avatar}
-                      />
+                      <Avatar alt='Sayuri' src={artistDataBySong.pic} className={classes.avatar} />
                     </Grid>
                     <Grid item xs>
                       {/* COLUMN, ATAS NAMA, BAWAH YEAR TYPE */}
                       <Grid container direction='column' justify='space-around' alignItems='stretch'>
                         <Grid item xs>
-                          <b className={classes.name}>Sayuri Fujita</b>
+                          <b className={classes.name}>{artistDataBySong.name}</b>
                         </Grid>
                         {/* ROW YEAR DAN TYPE */}
                         <Grid item xs>
                           <Grid container direction='row' justify='flex-start' alignItems='flex-start'>
                             <Grid item xs={4}>
-                              <b className={classes.old}>40 Years old</b>
+                              <b className={classes.old}>{artistDataBySong.old} Years old</b>
                             </Grid>
                             <Grid item xs={1}>
                               <b style={{ color: '#7c7f81' }}>|</b>
                             </Grid>
                             <Grid item xs>
-                              <b className={classes.type}>Solo Artist</b>
+                              <b className={classes.type}>
+                                {artistDataBySong.type && artistDataBySong.type.name ? artistDataBySong.type.name : null} Artist
+                              </b>
                             </Grid>
                           </Grid>
                         </Grid>
@@ -134,11 +134,7 @@ class modalDetailArtist extends Component {
                 </Grid>
                 <Grid item xs>
                   <div className={classes.biographyText}>
-                    <Typography>
-                      Sayuri Fujita adalah tokoh televisi Jepang yang berbasis di Korea Selatan. Sejak tahun 2007, ia secara
-                      reguler tampil pada KBS Global Talk Show sebagai perwakilan dari Jepang. Ia tampil secara reguler di
-                      Wonderful Friday sejak tahun 2011.
-                    </Typography>
+                    <Typography>{artistDataBySong.bio}</Typography>
                   </div>
                 </Grid>
               </Grid>
@@ -155,9 +151,8 @@ class modalDetailArtist extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    getDetailSongReducer: state.getDetailSongReducer,
-    authReducer: state.authReducer,
+    getArtistBySongReducer: state.getArtistBySongReducer,
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, null))(modalDetailArtist);
+export default compose(withStyles(styles), connect(mapStateToProps, { clearModalArtistDetailAction }))(modalDetailArtist);

@@ -76,3 +76,10 @@ export function getArtistBySongAction(name) {
       );
   };
 }
+export function clearModalArtistDetailAction() {
+  return function (dispatch) {
+    dispatch({
+      type: CLEAR_ARTIST_DATA_AND_MODAL,
+    });
+  };
+}
