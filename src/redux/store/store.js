@@ -8,7 +8,7 @@ import { upgradeReducer } from '../reducers/upgrade_reducer';
 import { getDataSongsReducer, postDataSongsReducer, getDetailSongReducer } from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
-import { PostDataArtistReducer, getDataArtistReducer } from '../reducers/arist_reducers';
+import { PostDataArtistReducer, getDataArtistReducer, getArtistBySongReducer } from '../reducers/arist_reducers';
 
 const reducers = combineReducers({
   transactionsReducer,
@@ -26,6 +26,7 @@ const reducers = combineReducers({
   PostDataArtistReducer,
   getDataArtistReducer,
   getDetailSongReducer,
+  getArtistBySongReducer,
 
   // song
   getDataSongsReducer,

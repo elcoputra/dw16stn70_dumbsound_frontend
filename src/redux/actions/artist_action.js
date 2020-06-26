@@ -7,6 +7,10 @@ import {
   GET_ARTIST_SUCCSESS,
   CLEAR_ERROR_ARTIST,
   CLEAR_MESSAGE_ARTIST,
+  GET_ARTIST_BY_SONG_REQUEST,
+  GET_ARTIST_BY_SONG_SUCCESS,
+  GET_ARTIST_BY_SONG_ERROR,
+  CLEAR_ARTIST_DATA_AND_MODAL,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -51,6 +55,22 @@ export function getDataArtistAction() {
       .catch((response) =>
         dispatch({
           type: GET_ARTIST_ERROR,
+          payload: response.error,
+        }),
+      );
+  };
+}
+
+export function getArtistBySongAction(name) {
+  return function (dispatch) {
+    dispatch({
+      type: GET_ARTIST_BY_SONG_REQUEST,
+    });
+    API.get('/song/artist/' + name)
+      .then((response) => dispatch({ type: GET_ARTIST_BY_SONG_SUCCESS, payload: response.data.data }))
+      .catch((response) =>
+        dispatch({
+          type: GET_ARTIST_BY_SONG_ERROR,
           payload: response.error,
         }),
       );

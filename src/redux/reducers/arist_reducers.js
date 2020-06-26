@@ -7,6 +7,10 @@ import {
   GET_ARTIST_SUCCSESS,
   CLEAR_ERROR_ARTIST,
   CLEAR_MESSAGE_ARTIST,
+  GET_ARTIST_BY_SONG_REQUEST,
+  GET_ARTIST_BY_SONG_SUCCESS,
+  GET_ARTIST_BY_SONG_ERROR,
+  CLEAR_ARTIST_DATA_AND_MODAL,
 } from '../actionTypes';
 
 const initialStatePost = {
@@ -16,7 +20,6 @@ const initialStatePost = {
   errorBoolArtist: false,
   errorArtist: '',
 };
-
 export const PostDataArtistReducer = (state = initialStatePost, action) => {
   switch (action.type) {
     case POST_ARTIST_REQUEST:
@@ -55,6 +58,7 @@ export const PostDataArtistReducer = (state = initialStatePost, action) => {
   }
 };
 
+///////////////////////////////////////////////////////////////////////////////
 const initialstateGet = {
   artistData: [],
   loadingGetArtist: false,
@@ -79,6 +83,45 @@ export const getDataArtistReducer = (state = initialstateGet, action) => {
         loadingGetArtist: false,
         errorGetArtist: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+///////////////////////////////////////////////////////////////////////////////
+const initialGetArtistBySong = {
+  artistDataBySong: {},
+  loadingGetArtistBySong: false,
+  errorGetArtistBySong: {},
+  modalArtist: false,
+};
+export const getArtistBySongReducer = (state = initialGetArtistBySong, action) => {
+  switch (action.type) {
+    case GET_ARTIST_BY_SONG_REQUEST:
+      return {
+        ...state,
+        loadingGetArtistBySong: true,
+      };
+    case GET_ARTIST_BY_SONG_SUCCESS:
+      return {
+        ...state,
+        loadingGetArtistBySong: false,
+        artistDataBySong: action.payload,
+        modalArtist: true,
+      };
+    case GET_ARTIST_BY_SONG_ERROR:
+      return {
+        ...state,
+        loadingGetArtistBySong: false,
+        errorGetArtistBySong: action.payload,
+      };
+    case CLEAR_ARTIST_DATA_AND_MODAL:
+      return {
+        ...state,
+        modalArtist: false,
+        artistDataBySong: {},
+      };
+
     default:
       return state;
   }

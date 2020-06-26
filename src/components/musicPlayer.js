@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Avatar, Grid, Typography } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { clearPlaylist } from '../redux/actions/song_actions';
+import { getArtistBySongAction } from '../redux/actions/artist_action';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
 
@@ -46,6 +47,11 @@ class musicPlayer extends Component {
       playIndex: audioLists.length - 1,
     });
   };
+
+  onCoverClick = (mode, audioLists, audioInfo) => {
+    // console.log(audioInfo.name);
+    this.props.getArtistBySongAction(audioInfo.name);
+  };
   render() {
     const { classes } = this.props;
     const { song } = this.props.getDetailSongReducer;
@@ -69,6 +75,8 @@ class musicPlayer extends Component {
             onAudioListsChange={(currentPlayId, audioLists, audioInfo) =>
               this.onAudioListsChange(currentPlayId, audioLists, audioInfo)
             }
+            // kalo cover di click
+            onCoverClick={(mode, audioLists, audioInfo) => this.onCoverClick(mode, audioLists, audioInfo)}
             // memainkan musik dari index yang baru di tambahkan
             playIndex={this.state.playIndex}
           />
@@ -83,4 +91,4 @@ const mapStateToProps = (state) => {
     authReducer: state.authReducer,
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, { clearPlaylist }))(musicPlayer);
+export default compose(withStyles(styles), connect(mapStateToProps, { clearPlaylist, getArtistBySongAction }))(musicPlayer);
