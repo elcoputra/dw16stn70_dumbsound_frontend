@@ -34,6 +34,15 @@ const styles = (theme) => ({
     height: '187px',
     borderRadius: '10px',
   },
+  divBaseFloatingMenuNoPay: {
+    backgroundColor: '#1F1F1F',
+    position: 'absolute',
+    top: '36px',
+    left: '-150%',
+    width: '178px',
+    height: 131,
+    borderRadius: '10px',
+  },
   divBaseFloatingMenuAdmin: {
     backgroundColor: '#1F1F1F',
     position: 'absolute',
@@ -97,11 +106,11 @@ const styles = (theme) => ({
     color: 'white',
   },
   buttonMenuProfile: {
-    width: 220,
+    width: 170,
     paddingRight: 50,
   },
   buttonMenuPay: {
-    width: 220,
+    width: 170,
     paddingRight: 90,
   },
   borderMenuDropdown: {
@@ -110,7 +119,7 @@ const styles = (theme) => ({
     backgroundColor: 'gray',
   },
   buttonMenuLogout: {
-    width: 220,
+    width: 174,
     paddingRight: 53,
   },
   buttonMenuFilm: {
@@ -254,23 +263,6 @@ class nav extends Component {
         <RegisterModal ref={this.RegisterModalRef}></RegisterModal>
         <AppBar className={classes.AppBar}>
           <Toolbar className={classes.Toolbar}>
-            {/* <Grid container direction='row' justify='flex-start' alignItems='center'>
-              <Box className={classes.Box}>
-                <Link className={classes.Link} to='/'>
-                  Home
-                </Link>
-              </Box>
-              <Box className={classes.Box}>
-                <Link className={classes.Link} to='/tv'>
-                  TV Shows
-                </Link>
-              </Box>
-              <Box className={classes.Box}>
-                <Link className={classes.Link} to='/moviess'>
-                  Movies
-                </Link>
-              </Box>
-            </Grid> */}
             <Grid container direction='row' justify='left' alignItems='center'>
               <Link className={classes.Link} to='/'>
                 <Button className={classes.ButtonAvatar}>
@@ -290,19 +282,22 @@ class nav extends Component {
                       <div className={classes.divBaseFloatingDecor}>
                         <img src={Segitiga} alt='segitiga' />
                       </div>
-                      <div className={classes.divBaseFloatingMenu}>
+                      <div className={userState.subscribe ? classes.divBaseFloatingMenuNoPay : classes.divBaseFloatingMenu}>
                         <Link className={classes.Link} to='/profile'>
                           <Button onClick={this.dropdownMenu} className={classes.buttonMenuProfile}>
                             <PersonOutline className={classes.IconMenu} />
                             <b className={classes.LabelMenu}>Profile</b>
                           </Button>
                         </Link>
-                        <Link className={classes.Link} to='/upgrade'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuPay}>
-                            <Payment className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Pay</b>
-                          </Button>
-                        </Link>
+                        {userState.subscribe ? null : (
+                          <Link className={classes.Link} to='/upgrade'>
+                            <Button onClick={this.dropdownMenu} className={classes.buttonMenuPay}>
+                              <Payment className={classes.IconMenu} />
+                              <b className={classes.LabelMenu}>Pay</b>
+                            </Button>
+                          </Link>
+                        )}
+
                         <Button className={classes.buttonMenuPay}></Button>
                         <div className={classes.borderMenuDropdown}></div>
                         <Link className={classes.Link} to='/'>

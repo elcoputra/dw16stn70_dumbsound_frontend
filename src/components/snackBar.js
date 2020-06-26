@@ -4,6 +4,7 @@ import { Alert } from '@material-ui/lab';
 import { clearError, clearMessage } from '../redux/actions/account_action';
 import { clearErrorArtist, clearMessageArtist } from '../redux/actions/artist_action';
 import { clearMessageAddSong, clearErrorAddSong } from '../redux/actions/song_actions';
+import { clearMessageUpgrade, clearErrorUpgrade } from '../redux/actions/upgrade_action';
 import { connect } from 'react-redux';
 
 class snackBar extends Component {
@@ -21,6 +22,7 @@ class snackBar extends Component {
     const messageRegister = message ? message : null;
     const { messageBoolArtist, errorBoolArtist, artistsMessage, errorArtist } = this.props.PostDataArtistReducer;
     const { messageBoolAddSong, messageAddSong, errorBoolAddSong, errorAddSong } = this.props.postDataSongsReducer;
+    const { errorUpgradeBool, errorUpgrade, messageUpgrade, messageUpgradeBool } = this.props.upgradeReducer;
     return (
       <div>
         {/* REGISTER SNACK*/}
@@ -47,7 +49,9 @@ class snackBar extends Component {
           </Alert>
         </Snackbar>
         {/* REGISTER SNACK*/}
+
         {/* ////////////////////////////////////////////////////////////////// */}
+
         {/* ARTIST SNACK*/}
         {/* SUCCESS */}
         <Snackbar
@@ -72,7 +76,9 @@ class snackBar extends Component {
           </Alert>
         </Snackbar>
         {/* ARTIST SNACK*/}
+
         {/* ////////////////////////////////////////////////////////////////// */}
+
         {/* SONG SNACK*/}
         {/* SUCCESS */}
         <Snackbar
@@ -97,6 +103,33 @@ class snackBar extends Component {
           </Alert>
         </Snackbar>
         {/* SONG SNACK */}
+
+        {/* ////////////////////////////////////////////////////////////////// */}
+
+        {/* UPGRADE SNACK*/}
+        {/* SUCCESS */}
+        <Snackbar
+          open={messageUpgradeBool}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearMessageUpgrade}
+        >
+          <Alert onClose={this.props.clearMessageUpgrade} severity='success'>
+            {messageUpgrade ? messageUpgrade : 'success'}
+          </Alert>
+        </Snackbar>
+        {/* ERROR */}
+        <Snackbar
+          open={errorUpgradeBool}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearErrorUpgrade}
+        >
+          <Alert onClose={this.props.clearErrorUpgrade} severity='error'>
+            {errorUpgrade ? errorUpgrade : messageUpgrade ? messageUpgrade : 'error'}
+          </Alert>
+        </Snackbar>
+        {/* UPGRADE SNACK */}
       </div>
     );
   }
@@ -107,6 +140,7 @@ const mapStateToProps = (state) => {
     userReducer: state.userReducer,
     PostDataArtistReducer: state.PostDataArtistReducer,
     postDataSongsReducer: state.postDataSongsReducer,
+    upgradeReducer: state.upgradeReducer,
   };
 };
 
@@ -117,4 +151,6 @@ export default connect(mapStateToProps, {
   clearMessageArtist,
   clearMessageAddSong,
   clearErrorAddSong,
+  clearMessageUpgrade,
+  clearErrorUpgrade,
 })(snackBar);
