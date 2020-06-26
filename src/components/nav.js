@@ -11,6 +11,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { openModalRegister, openModalLogin } from '../redux/actions/modal_actions';
 import { authAction, logoutUser } from '../redux/actions/auth_action';
+import ModalDetailArtist from '../components/modalDetailArtist';
 
 const styles = (theme) => ({
   marginAutoItem: {},
@@ -55,6 +56,12 @@ const styles = (theme) => ({
   AppBar: {
     background: 'transparent',
     boxShadow: 'none',
+    height: '70px',
+    width: '100%',
+  },
+  AppBarScrool: {
+    background: '#161616',
+    boxShadow: 3,
     height: '70px',
     width: '100%',
   },
@@ -155,11 +162,13 @@ class nav extends Component {
       isLogin: false,
       isAdmin: false,
       isMenu: false,
+      scrolling: 0,
     };
 
     // this.getDataFromModalComponent = this.getDataFromModalComponent.bind(this);
   }
   componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
     const isLogin = localStorage.getItem('isLogin');
     const isAdmin = localStorage.getItem('isAdmin');
     if (isLogin === 'false') {
@@ -182,6 +191,16 @@ class nav extends Component {
         isAdmin: true,
       });
     }
+    // Fungsi detetct scroll
+    window.onscroll = () => {
+      this.setState({
+        scrolling: window.pageYOffset,
+      });
+    };
+  }
+  // fungsi stop event saat scroll berhenti
+  componentWillUnmount() {
+    window.onscroll = null;
   }
 
   dropdownMenu = () => {
@@ -261,7 +280,8 @@ class nav extends Component {
       <div className={classes.divRoot}>
         <LoginModal sendDataIsLogin={this.getDataFromModalComponent} ref={this.loginModalRef}></LoginModal>
         <RegisterModal ref={this.RegisterModalRef}></RegisterModal>
-        <AppBar className={classes.AppBar}>
+        <ModalDetailArtist />
+        <AppBar className={this.state.scrolling >= 100 ? classes.AppBarScrool : classes.AppBar}>
           <Toolbar className={classes.Toolbar}>
             <Grid container direction='row' justify='left' alignItems='center'>
               <Link className={classes.Link} to='/'>

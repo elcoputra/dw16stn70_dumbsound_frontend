@@ -8,16 +8,6 @@ import { connect } from 'react-redux';
 const styles = (theme) => ({
   BoxBase: {
     width: '100%',
-    // height: 350,
-    // backgroundImage: `url(${HeaderImage})`,
-    // // backgroundImage: `url(${HeaderImage})`,
-    // backgroundRepeat: 'no-repeat',
-    // backgroundPosition: 'center center',
-    // backgroundAttachment: 'fixed',
-    // backgroundSize: 'cover',
-    // position: 'relative',
-    // objectFit: 'cover',
-    // objectPosition: 'center',
   },
   Img: {
     maxWidth: '100%',
@@ -35,15 +25,6 @@ const styles = (theme) => ({
     color: 'white',
     fontSize: '18px',
     textShadow: '2px 2px 2px #484848',
-  },
-  imgGradient: {
-    width: '100%',
-    height: 'auto',
-    imageAttachment: 'fixed',
-    imageSize: 'cover',
-    position: 'absolute',
-    left: '0',
-    bottom: '0',
   },
   ButtonWatchNow: {
     height: '60px',
@@ -77,7 +58,7 @@ const styles = (theme) => ({
     textShadow: '1px 1px #a5a8ad',
   },
   nameArtistDiv: {
-    top: 285,
+    top: 225,
     left: 25,
     position: 'absolute',
   },
@@ -95,7 +76,6 @@ class headerSongsByArtistjs extends Component {
     const { artistDataBySong } = this.props.getArtistBySongReducer;
     return (
       <>
-        <div style={{ height: 70 }} />
         <div className={classes.nameArtistDiv}>
           <b className={classes.nameArtistText}>{artistDataBySong.name}</b>
         </div>
