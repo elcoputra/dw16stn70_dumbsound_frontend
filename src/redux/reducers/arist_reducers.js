@@ -119,7 +119,6 @@ export const getArtistBySongReducer = (state = initialGetArtistBySong, action) =
       return {
         ...state,
         modalArtist: false,
-        artistDataBySong: {},
       };
 
     default:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Box, Grid } from '@material-ui/core';
+import { Button, Box, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import HeaderImage from '../img/header/panggung.png';
 import logoHeaderImage from '../img/header/YourName-logo-width-bw-invert.png';
@@ -54,6 +54,20 @@ const styles = (theme) => ({
     paddingLeft: '10px',
     paddingRight: '10px',
   },
+  text1: {
+    fontSize: 48,
+    color: 'white',
+
+    textAlign: 'center',
+    textShadow: '1px 1px #a5a8ad',
+  },
+  text2: {
+    fontSize: 24,
+    color: 'white',
+    maxWidth: 715,
+    textAlign: 'center',
+    textShadow: '1px 1px #a5a8ad',
+  },
 });
 
 class headerHome extends Component {
@@ -62,43 +76,23 @@ class headerHome extends Component {
     return (
       <div>
         <Box className={classes.BoxBase}>
-          {/* <Box classNmae={classes.BoxDescription}>
-            <Grid
-              container
-              xs={6}
-              spacing='3'
-              direction='column'
-              justify='flex-start'
-              alignItems='flex-start'
-              className={classes.GridDescription}
-            >
-              <Grid item xs>
-                <img src={logoHeaderImage} alt='' className={classes.img} />
-              </Grid>
-              <Grid item xs>
-                Two strangers find themselves linked in a bizarre way. When a connection forms, will distance be the only thing to
-                keep them apart?
-              </Grid>
-              <Grid item xs>
-                <Grid container spacing='3' direction='row' justify='flex-start' alignItems='center'>
-                  <Grid item xs>
-                    2016
-                  </Grid>
-                  <Grid item xs>
-                    <Box border={1} borderRadius={4} className={classes.BorderedBox}>
-                      Movies
-                    </Box>
-                  </Grid>
+          <Grid container style={{ height: '100%' }} direction='column' justify='center' alignItems='center'>
+            <Grid item xs></Grid>
+            <Grid item xs>
+              <Grid container style={{ height: '100%' }} direction='column' justify='center' alignItems='center'>
+                <Grid item xs>
+                  <Typography className={classes.text1}>Connect on DumbSound</Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography className={classes.text2}>
+                    Discovery, Stream, and share a constantly expanding mix of music from emerging and major artists around the
+                    world
+                  </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs>
-                <Button variant='contained' className={classes.ButtonWatchNow}>
-                  WATCH NOW!
-                </Button>
-              </Grid>
             </Grid>
-          </Box> */}
-          {/* <img src={gradientImage} alt='' className={classes.imgGradient} /> */}
+            <Grid item xs></Grid>
+          </Grid>
         </Box>
       </div>
     );

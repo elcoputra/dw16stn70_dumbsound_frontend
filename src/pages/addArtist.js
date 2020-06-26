@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, Backdrop, Fade, TextField, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {
+  TextareaAutosize,
+  Backdrop,
+  Fade,
+  TextField,
+  Grid,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getDataTypesAction } from '../redux/actions/types_action';
@@ -16,7 +27,6 @@ const styles = (theme) => ({
 
   formControl: {
     marginTop: 15,
-    marginBottom: 15,
     marginLeft: 5,
     height: 50,
     width: 1161,
@@ -180,15 +190,6 @@ const styles = (theme) => ({
   iconAddForm: {
     fontSize: 40,
   },
-  TextareaAutosize: {
-    marginTop: 5,
-    marginLeft: 1,
-    marginBottom: 30,
-    width: 1145,
-    color: 'white',
-    borderRadius: 5,
-    backgroundColor: '#353535',
-  },
   InputLabel: {
     color: 'white',
   },
@@ -236,6 +237,15 @@ const styles = (theme) => ({
     fontWeight: '900',
     marginRight: 1036,
     marginTop: 45,
+  },
+  TextareaAutosize: {
+    marginTop: 15,
+    marginLeft: 1,
+    height: 70,
+    width: 1155,
+    color: 'white',
+    borderRadius: 5,
+    backgroundColor: '#353535',
   },
 });
 
@@ -385,6 +395,71 @@ class addArtist extends Component {
                   root: classes.cssOutlinedInput,
                   focused: classes.cssFocused,
                   notchedOutline: classes.notchedOutline,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextareaAutosize
+              className={classes.TextareaAutosize}
+              aria-label='minimum height'
+              rowsMin={4}
+              name='bio'
+              value={this.state.uploadArtistData.bio}
+              onChange={this.handleChangeArtistInputGroup}
+              placeholder='Biography'
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              id='standard-name'
+              label='Profile Picture Link'
+              name='pic'
+              value={this.state.uploadArtistData.pic ? this.state.uploadArtistData.pic : ''}
+              onChange={this.handleChangeArtistInputGroup}
+              className={classes.textField2}
+              margin='normal'
+              variant='outlined'
+              InputLabelProps={{
+                classes: {
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                  FormHelperTextProps: classes.floatingLabelFocusStyle,
+                },
+              }}
+              InputProps={{
+                classes: {
+                  root: classes.cssOutlinedInput,
+                  focused: classes.cssFocused,
+                  notchedOutline: classes.notchedOutline,
+                  FormHelperTextProps: classes.floatingLabelFocusStyle,
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs>
+            <TextField
+              id='standard-name'
+              label='Cover Picture Link'
+              name='cover'
+              value={this.state.uploadArtistData.cover ? this.state.uploadArtistData.cover : ''}
+              onChange={this.handleChangeArtistInputGroup}
+              className={classes.textField2}
+              margin='normal'
+              variant='outlined'
+              InputLabelProps={{
+                classes: {
+                  root: classes.cssLabel,
+                  focused: classes.cssFocused,
+                  FormHelperTextProps: classes.floatingLabelFocusStyle,
+                },
+              }}
+              InputProps={{
+                classes: {
+                  root: classes.cssOutlinedInput,
+                  focused: classes.cssFocused,
+                  notchedOutline: classes.notchedOutline,
+                  FormHelperTextProps: classes.floatingLabelFocusStyle,
                 },
               }}
             />

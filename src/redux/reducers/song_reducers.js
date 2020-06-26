@@ -11,6 +11,9 @@ import {
   CLEAR_DETAIL_SONG_SUCCSESS,
   CLEAR_MESSAGE_ADD_SONG,
   CLEAR_ERROR_ADD_SONG,
+  GET_SONGS_BY_ARTIST_REQUEST,
+  GET_SONGS_BY_ARTIST_SUCCESS,
+  GET_SONGS_BY_ARTIST_ERROR,
 } from '../actionTypes';
 
 const initialstateSongs = {
@@ -37,6 +40,35 @@ export const getDataSongsReducer = (state = initialstateSongs, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+const initialstateSongsByArtist = {
+  songsByArtist: {},
+  loadingSongsByArtist: false,
+  errorSongsByArtist: {},
+};
+
+export const getSongsByArtistReducer = (state = initialstateSongsByArtist, action) => {
+  switch (action.type) {
+    case GET_SONGS_BY_ARTIST_REQUEST:
+      return {
+        ...state,
+        loadingSongsByArtist: true,
+      };
+    case GET_SONGS_BY_ARTIST_SUCCESS:
+      return {
+        ...state,
+        loadingSongsByArtist: false,
+        songsByArtist: action.payload,
+      };
+    case GET_SONGS_BY_ARTIST_ERROR:
+      return {
+        ...state,
+        loadingSongsByArtist: false,
+        errorSongsByArtist: action.payload,
       };
     default:
       return state;

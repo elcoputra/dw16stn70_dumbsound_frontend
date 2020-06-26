@@ -9,6 +9,7 @@ import Profile from './pages/profilePage';
 import Upgrade from './pages/upgradePage';
 import AddArtist from './pages/addArtist';
 import AddSong from './pages/addSongs';
+import SongsByArtist from './pages/songsByArtist';
 import Transaction from './pages/transactionPage';
 import SnackBar from '../src/components/snackBar';
 import { authAction } from './redux/actions/auth_action';
@@ -37,6 +38,7 @@ class App extends Component {
           <Navbar />
           <SnackBar />
           <Switch>
+            <PrivateRouteUser path='/artist/songs' component={SongsByArtist} />
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
             <PrivateRouteAdmin path='/add-artist' component={AddArtist} />
             <PrivateRouteAdmin path='/add-song' component={AddSong} />

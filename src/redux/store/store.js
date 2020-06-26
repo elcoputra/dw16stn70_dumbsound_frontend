@@ -5,7 +5,12 @@ import { modalRegisterReducer, modalLoginReducer } from '../reducers/modal_reduc
 import { userReducer } from '../reducers/account_reducer';
 import { authReducer } from '../reducers/auth_reducer';
 import { upgradeReducer } from '../reducers/upgrade_reducer';
-import { getDataSongsReducer, postDataSongsReducer, getDetailSongReducer } from '../reducers/song_reducers';
+import {
+  getDataSongsReducer,
+  postDataSongsReducer,
+  getDetailSongReducer,
+  getSongsByArtistReducer,
+} from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
 import { PostDataArtistReducer, getDataArtistReducer, getArtistBySongReducer } from '../reducers/arist_reducers';
@@ -31,6 +36,7 @@ const reducers = combineReducers({
   // song
   getDataSongsReducer,
   postDataSongsReducer,
+  getSongsByArtistReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

@@ -4,6 +4,8 @@ import { Modal, Backdrop, Fade, Box, Grid, Avatar, Typography, TextField, Button
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { clearModalArtistDetailAction } from '../redux/actions/artist_action';
+import { getSongsByArtistAction } from '../redux/actions/song_actions';
+import { Link as LinkRouter } from 'react-router-dom';
 
 const styles = (theme) => ({
   modal: {
@@ -73,6 +75,12 @@ const styles = (theme) => ({
 });
 
 class modalDetailArtist extends Component {
+  handleFindSongs = (id) => {
+    // Kirim data id ke action pencari lagu by artist
+    this.props.getSongsByArtistAction(id);
+    this.props.clearModalArtistDetailAction();
+  };
+
   render() {
     const { classes } = this.props;
     const { artistDataBySong, loadingGetArtistBySong, errorGetArtistBySong, modalArtist } = this.props.getArtistBySongReducer;
@@ -138,9 +146,15 @@ class modalDetailArtist extends Component {
                   </div>
                 </Grid>
               </Grid>
-              <Button variant='contained' onClick={this.handleSubmitRegister} className={classes.ButtonListSongByArtist}>
-                See all the songs
-              </Button>
+              <LinkRouter to='/artist/songs'>
+                <Button
+                  variant='contained'
+                  onClick={() => this.handleFindSongs(artistDataBySong.id)}
+                  className={classes.ButtonListSongByArtist}
+                >
+                  See all the songs
+                </Button>
+              </LinkRouter>
             </Box>
           </Fade>
         </Modal>
@@ -155,4 +169,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(withStyles(styles), connect(mapStateToProps, { clearModalArtistDetailAction }))(modalDetailArtist);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { clearModalArtistDetailAction, getSongsByArtistAction }),
+)(modalDetailArtist);

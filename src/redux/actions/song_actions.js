@@ -11,6 +11,9 @@ import {
   CLEAR_DETAIL_SONG_SUCCSESS,
   CLEAR_ERROR_ADD_SONG,
   CLEAR_MESSAGE_ADD_SONG,
+  GET_SONGS_BY_ARTIST_REQUEST,
+  GET_SONGS_BY_ARTIST_SUCCESS,
+  GET_SONGS_BY_ARTIST_ERROR,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -57,6 +60,21 @@ export function getDataSongsAction() {
         dispatch({
           type: GET_SONGS_ERROR,
           payload: response.error,
+        }),
+      );
+  };
+}
+export function getSongsByArtistAction(id) {
+  return function (dispatch) {
+    dispatch({
+      type: GET_SONGS_BY_ARTIST_REQUEST,
+    });
+    API.get('artist/' + id + '/songs')
+      .then((response) => dispatch({ type: GET_SONGS_BY_ARTIST_SUCCESS, payload: response.data.data }))
+      .catch((error) =>
+        dispatch({
+          type: GET_SONGS_BY_ARTIST_ERROR,
+          payload: error.response,
         }),
       );
   };
