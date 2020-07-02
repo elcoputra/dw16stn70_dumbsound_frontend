@@ -2,6 +2,7 @@
 
 Dumbsound is a music streaming service, providing music from various countries, artists
 and record labels.
+[Go to backend](https://github.com/elcoputra/dw16stn70_dumbsound_backend)
 
 # Screenshoot
 ![ss](https://raw.githubusercontent.com/elcoputra/dw16stn70_dumbsound_frontend/master/SS/all.png)
