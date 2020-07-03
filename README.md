@@ -20,4 +20,5 @@ Start
 `npm start` on project folder
 
 ## Missing feature
--
+- Delete Music
+- Update Music
