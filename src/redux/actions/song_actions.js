@@ -14,6 +14,16 @@ import {
   GET_SONGS_BY_ARTIST_REQUEST,
   GET_SONGS_BY_ARTIST_SUCCESS,
   GET_SONGS_BY_ARTIST_ERROR,
+  DELETE_SONGS_REQUEST,
+  DELETE_SONGS_SUCCSESS,
+  DELETE_SONGS_ERROR,
+  CLEAR_DELETE_SONG_MESSAGE,
+  CLEAR_DELETE_SONG_ERROR,
+  OPEN_MODAL_UPDATE_SONG,
+  CLOSE_MODAL_UPDATE_SONG,
+  UPDATE_SONGS_REQUEST,
+  UPDATE_SONGS_SUCCSESS,
+  UPDATE_SONGS_ERROR,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -43,9 +53,7 @@ export function clearMessageAddSong() {
 }
 export function clearErrorAddSong() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_ERROR_ADD_SONG });
-    }
+    dispatch({ type: CLEAR_ERROR_ADD_SONG });
   };
 }
 
@@ -100,5 +108,73 @@ export function clearPlaylist(id) {
     dispatch({
       type: CLEAR_DETAIL_SONG_SUCCSESS,
     });
+  };
+}
+
+// Delete song
+export function deleteSongAction(id) {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: DELETE_SONGS_REQUEST,
+      });
+      const response = await API.delete('/song/' + id);
+      dispatch({
+        type: DELETE_SONGS_SUCCSESS,
+        payload: response.data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_SONGS_ERROR,
+        payload: error.response,
+      });
+    }
+  };
+}
+
+export function clearMessageDeleteSongAction() {
+  return function (dispatch) {
+    dispatch({ type: CLEAR_DELETE_SONG_MESSAGE });
+  };
+}
+
+export function clearErrorDeleteSongAction() {
+  return function (dispatch) {
+    dispatch({ type: CLEAR_DELETE_SONG_ERROR });
+  };
+}
+
+// update + modal update
+export function openModalSongUpdateAction(id, title, artist, year, thumbnailLink, musicLink) {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_MODAL_UPDATE_SONG,
+      payload: { id: id, title: title, artist: artist, year: year, thumbnailLink: thumbnailLink, musicLink: musicLink },
+    });
+  };
+}
+export function closeModalSongUpdateAction() {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_MODAL_UPDATE_SONG });
+  };
+}
+
+export function updateSongAction(id, data) {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: UPDATE_SONGS_REQUEST,
+      });
+      const response = await API.patch('/song/' + id, data);
+      dispatch({
+        type: UPDATE_SONGS_SUCCSESS,
+        payload: response.data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_SONGS_ERROR,
+        payload: error.response,
+      });
+    }
   };
 }

@@ -10,6 +10,8 @@ import {
   postDataSongsReducer,
   getDetailSongReducer,
   getSongsByArtistReducer,
+  deleteSongReducer,
+  updateSongReducer,
 } from '../reducers/song_reducers';
 import { transactionsReducer, transactionByIdReducer } from '../reducers/transactions_reducer';
 import { getDataTypesReducer } from '../reducers/types_reducers';
@@ -37,6 +39,8 @@ const reducers = combineReducers({
   getDataSongsReducer,
   postDataSongsReducer,
   getSongsByArtistReducer,
+  deleteSongReducer,
+  updateSongReducer,
 });
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

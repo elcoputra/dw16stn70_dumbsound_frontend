@@ -14,6 +14,16 @@ import {
   GET_SONGS_BY_ARTIST_REQUEST,
   GET_SONGS_BY_ARTIST_SUCCESS,
   GET_SONGS_BY_ARTIST_ERROR,
+  DELETE_SONGS_REQUEST,
+  DELETE_SONGS_SUCCSESS,
+  DELETE_SONGS_ERROR,
+  CLEAR_DELETE_SONG_MESSAGE,
+  CLEAR_DELETE_SONG_ERROR,
+  OPEN_MODAL_UPDATE_SONG,
+  CLOSE_MODAL_UPDATE_SONG,
+  UPDATE_SONGS_REQUEST,
+  UPDATE_SONGS_SUCCSESS,
+  UPDATE_SONGS_ERROR,
 } from '../actionTypes';
 
 const initialstateSongs = {
@@ -163,6 +173,103 @@ export const getDetailSongReducer = (state = initialstateDetailSong, action) => 
       return {
         ...state,
         song: [],
+      };
+    default:
+      return state;
+  }
+};
+
+// Delete song
+const initialDeleteSong = {
+  loadingDeleteSong: false,
+  messageDeleteSongBool: false,
+  errorDeleteSongBool: false,
+  messageDeleteSong: '',
+  errorDeleteSong: '',
+};
+
+export const deleteSongReducer = (state = initialDeleteSong, action) => {
+  switch (action.type) {
+    case DELETE_SONGS_REQUEST:
+      return {
+        ...state,
+        loadingDeleteSong: true,
+      };
+    case DELETE_SONGS_SUCCSESS:
+      return {
+        ...state,
+        loadingDeleteSong: false,
+        messageDeleteSongBool: true,
+        messageDeleteSong: action.payload,
+      };
+    case DELETE_SONGS_ERROR:
+      return {
+        ...state,
+        errorDeleteSongBool: true,
+        loadingDeleteSong: false,
+        errorDeleteSong: action.payload,
+      };
+    case CLEAR_DELETE_SONG_MESSAGE:
+      return {
+        ...state,
+        messageDeleteSongBool: false,
+        messageDeleteSong: '',
+      };
+    case CLEAR_DELETE_SONG_ERROR:
+      return {
+        ...state,
+        errorDeleteSongBool: false,
+        errorDeleteSong: '',
+      };
+    default:
+      return state;
+  }
+};
+
+// update song + update modal
+const initialUpdateSong = {
+  openModalUpdate: false,
+  dataSongForUpdate: {},
+  // Update data process
+  loadingUpdateSong: false,
+  messageUpdateSong: '',
+  errorUpdateSong: '',
+  messageBoolUpdateSong: false,
+  errorBoolUpdateSong: false,
+};
+
+export const updateSongReducer = (state = initialUpdateSong, action) => {
+  switch (action.type) {
+    case OPEN_MODAL_UPDATE_SONG:
+      return {
+        ...state,
+        openModalUpdate: true,
+        dataSongForUpdate: action.payload,
+      };
+    case CLOSE_MODAL_UPDATE_SONG:
+      return {
+        ...state,
+        openModalUpdate: false,
+      };
+    // UPDATING
+    case UPDATE_SONGS_REQUEST:
+      return {
+        ...state,
+        loadingUpdateSong: true,
+      };
+    case UPDATE_SONGS_SUCCSESS:
+      return {
+        ...state,
+        loadingUpdateSong: false,
+        messageUpdateSong: action.payload,
+        messageBoolUpdateSong: true,
+      };
+    case UPDATE_SONGS_ERROR:
+      return {
+        ...state,
+        loadingUpdateSong: false,
+        errorUpdateSong: action.payload,
+        errorBoolUpdateSong: true,
       };
     default:
       return state;

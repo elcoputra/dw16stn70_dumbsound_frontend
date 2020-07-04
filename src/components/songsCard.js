@@ -1,12 +1,175 @@
 import React, { Component } from 'react';
-import { Grid, Card, CardActionArea, Typography } from '@material-ui/core';
+import { Grid, Card, CardActionArea, Typography, Box, IconButton, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-// import { getDataTv, getDetailMovie } from '../redux/actions/movie_action';
-// import { getDataEpisodes } from '../redux/actions/episode_action';
-import { getDataSongsAction, getDetailSongAction } from '../redux/actions/song_actions';
+import {
+  getDataSongsAction,
+  getDetailSongAction,
+  deleteSongAction,
+  openModalSongUpdateAction,
+} from '../redux/actions/song_actions';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+
+class songsCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdmin: false,
+      mouseHover: false,
+      idMouseHover: 0,
+    };
+  }
+  componentDidMount() {
+    this.props.getDataSongsAction();
+  }
+
+  onMouseEnterHandler = (id) => {
+    this.setState({ idMouseHover: id });
+    this.setState({ mouseHover: true });
+  };
+  onMouseLeaveHandler = (id) => {
+    this.setState({ mouseHover: false });
+  };
+
+  updateButton = (id, title, artist, year, thumbnailLink, musicLink) => {
+    this.props.openModalSongUpdateAction(id, title, artist, year, thumbnailLink, musicLink);
+  };
+  deleteButton = (id) => {
+    console.log(id);
+    this.props.deleteSongAction(id);
+    this.props.getDataSongsAction();
+  };
+
+  onHoverItem(id, title, artist, year, thumbnailLink, musicLink) {
+    const { classes } = this.props;
+    return (
+      <div className={classes.contExtendFunc} id={id} onMouseLeave={() => this.onMouseLeaveHandler(id)}>
+        <Grid container direction='column' justify='center' alignItems='center'>
+          <Grid item xs>
+            <Typography noWrap className={classes.TypographyTitleTooltip}>
+              {title}
+            </Typography>
+          </Grid>
+          <Grid item xs>
+            <Typography noWrap className={classes.TypographyArtistTooltip}>
+              {artist}
+            </Typography>
+          </Grid>
+          <Grid item xs>
+            <div style={{ marginTop: '50%' }}>
+              <Grid container direction='row' justify='center' alignItems='center'>
+                <Grid item xs>
+                  <Button
+                    variant='contained'
+                    onClick={() => this.updateButton(id, title, artist, year, thumbnailLink, musicLink)}
+                    style={{ backgroundColor: 'white', color: '#EE4522', marginRight: 5 }}
+                  >
+                    Update
+                  </Button>
+                </Grid>
+                <Grid item xs>
+                  <Button
+                    variant='contained'
+                    // onClick={() => this.deleteButton(id)}
+                    onClick={() => {
+                      if (window.confirm('Are you sure to delete "' + title + '"')) this.deleteButton(id);
+                    }}
+                    style={{ backgroundColor: '#EE4522', color: 'white' }}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
+
+  render(props) {
+    const { classes } = this.props;
+    const { songs, loading } = this.props.getDataSongsReducer;
+    const { userState } = this.props.authReducer;
+    return (
+      <div>
+        {loading ? (
+          <div style={{ color: 'white' }}>loading...</div>
+        ) : (
+          <Grid className={classes.gridBase} container direction='column' justify='flex-start' alignItems='flex-start'>
+            <Grid item xs classes={{ root: classes.rootGridTitle }}>
+              <Grid container spacing={0} direction='row' alignItems='center' justify='center'>
+                <b className={classes.title}>Dengarkan Dan Rasakan</b>
+              </Grid>
+            </Grid>
+            <Grid item xs>
+              <Grid
+                className={classes.gridCard}
+                spacing={4}
+                container
+                direction='row'
+                justify='flex-start'
+                alignItems='flex-start'
+              >
+                {songs.slice(this.props.init, this.props.end).map((detailData) => {
+                  return (
+                    <div className={classes.Div}>
+                      <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
+                        <div>
+                          {this.state.mouseHover && detailData.id === this.state.idMouseHover && userState.isAdmin ? (
+                            this.onHoverItem(
+                              detailData.id,
+                              detailData.title,
+                              detailData.artist.name,
+                              detailData.year,
+                              detailData.thumbnailLink,
+                              detailData.musicLink,
+                            )
+                          ) : (
+                            <Card classes={{ root: classes.rootCard }} className={classes.Card}>
+                              <CardActionArea
+                                onClick={
+                                  userState.isAdmin || userState.subscribe
+                                    ? () => this.props.getDetailSongAction(detailData.id)
+                                    : null
+                                }
+                                className={classes.CardActionArea}
+                              >
+                                <Link className={classes.Link}>
+                                  <div className={classes.divImg}>
+                                    <img src={detailData.thumbnailLink} alt={detailData.title} className={classes.Img} />
+                                  </div>
+                                  <Grid container direction='row' justify='space-around' alignItems='center'>
+                                    <Grid xs>
+                                      <Typography noWrap className={classes.TypographyTitle}>
+                                        {detailData.title}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid xs>
+                                      <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
+                                    </Grid>
+                                  </Grid>
+                                  <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
+                                </Link>
+                              </CardActionArea>
+                            </Card>
+                          )}
+                        </div>
+                      </Grid>
+                    </div>
+                  );
+                })}
+              </Grid>
+            </Grid>
+          </Grid>
+        )}
+        {/* kasih logic di bawah ini buat kalo player terbuka otomatis muncul, dan sebaliknya */}
+        <div className={classes.pusherCard}></div>
+      </div>
+    );
+  }
+}
 
 const styles = (theme) => ({
   rootCard: {
@@ -35,30 +198,20 @@ const styles = (theme) => ({
     maxWidth: '200px',
     borderRadius: 10,
     width: 192,
-    // backgroundColor: 'black',
-    // color: 'black',
   },
-  //   CardMedia: {
-  //     width: "100%",
-  //     maxWidth: "200px",
-  //     minWidth: "200px",
-  //     height: "100%",
-  //     maxHeight: "300px",
-  //     minHeight: "300px",
-  //   },
+  divImg: {
+    height: 152,
+    marginTop: 13,
+  },
   Img: {
-    maxWidth: 165,
-    minWidth: 165,
-    maxHeight: 152,
-    minHeight: 152,
+    width: 165,
+    height: 152,
     objectFit: 'cover',
     objectPosition: 'center',
-    marginTop: 13,
   },
   CardActionArea: {
     maxWidth: '200px',
     backgroundColor: '#3a3a3a',
-    // color: '#000000',
     width: 192,
     display: 'flex',
 
@@ -96,92 +249,41 @@ const styles = (theme) => ({
   pusherCard: {
     height: 85,
   },
+  contExtendFunc: {
+    backgroundColor: '#3A3A3A',
+    width: 192,
+    borderRadius: 10,
+    height: 227,
+  },
+  TypographyTitleTooltip: {
+    textAlign: 'center',
+    width: 180,
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: 'white',
+    paddingTop: 5,
+  },
+  TypographyArtistTooltip: {
+    textAlign: 'center',
+    width: 180,
+    color: 'white',
+    fontSize: '14px',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
 });
-class songsCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAdmin: false,
-    };
-  }
-  componentDidMount() {
-    this.props.getDataSongsAction();
-  }
 
-  render(props) {
-    const { classes } = this.props;
-    const { songs, loading } = this.props.getDataSongsReducer;
-    const { userState } = this.props.authReducer;
-    return (
-      <div>
-        {loading ? (
-          <div style={{ color: 'white' }}>loading...</div>
-        ) : (
-          <Grid className={classes.gridBase} container direction='column' justify='flex-start' alignItems='flex-start'>
-            <Grid item xs classes={{ root: classes.rootGridTitle }}>
-              <Grid container spacing={0} direction='row' alignItems='center' justify='center'>
-                <b className={classes.title}>Dengarkan Dan Rasakan</b>
-              </Grid>
-            </Grid>
-            <Grid item xs>
-              <Grid
-                className={classes.gridCard}
-                spacing={4}
-                container
-                direction='row'
-                justify='flex-start'
-                alignItems='flex-start'
-              >
-                {songs.slice(this.props.init, this.props.end).map((detailData) => {
-                  return (
-                    <div className={classes.Div}>
-                      <Grid item xs>
-                        <Card classes={{ root: classes.rootCard }} className={classes.Card}>
-                          <CardActionArea
-                            onClick={
-                              userState.isAdmin || userState.subscribe
-                                ? () => this.props.getDetailSongAction(detailData.id)
-                                : null
-                            }
-                            className={classes.CardActionArea}
-                          >
-                            <Link className={classes.Link}>
-                              <img src={detailData.thumbnailLink} alt='asdawda' className={classes.Img} />
-                              <Grid container direction='row' justify='space-around' alignItems='center'>
-                                <Grid xs>
-                                  <Typography noWrap className={classes.TypographyTitle}>
-                                    {detailData.title}
-                                  </Typography>
-                                </Grid>
-                                <Grid xs>
-                                  <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
-                                </Grid>
-                              </Grid>
-                              <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
-                            </Link>
-                          </CardActionArea>
-                        </Card>
-                      </Grid>
-                    </div>
-                  );
-                })}
-              </Grid>
-            </Grid>
-          </Grid>
-        )}
-        {/* kasih logic di bawah ini buat kalo player terbuka otomatis muncul, dan sebaliknya */}
-        <div className={classes.pusherCard}></div>
-      </div>
-    );
-  }
-}
 const mapStateToProps = (state) => {
   return {
     getDataSongsReducer: state.getDataSongsReducer,
     authReducer: state.authReducer,
+    deleteSongReducer: state.deleteSongReducer,
   };
 };
-export default compose(withStyles(styles), connect(mapStateToProps, { getDataSongsAction, getDetailSongAction }))(songsCard);
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { getDataSongsAction, getDetailSongAction, deleteSongAction, openModalSongUpdateAction }),
+)(songsCard);
 
 // TUT memakai map
 // {DataTv.map((detailData, index) => {

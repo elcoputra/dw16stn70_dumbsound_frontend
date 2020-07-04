@@ -3,7 +3,12 @@ import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { clearError, clearMessage } from '../redux/actions/account_action';
 import { clearErrorArtist, clearMessageArtist } from '../redux/actions/artist_action';
-import { clearMessageAddSong, clearErrorAddSong } from '../redux/actions/song_actions';
+import {
+  clearMessageAddSong,
+  clearErrorAddSong,
+  clearMessageDeleteSongAction,
+  clearErrorDeleteSongAction,
+} from '../redux/actions/song_actions';
 import { clearMessageUpgrade, clearErrorUpgrade } from '../redux/actions/upgrade_action';
 import { connect } from 'react-redux';
 
@@ -23,6 +28,7 @@ class snackBar extends Component {
     const { messageBoolArtist, errorBoolArtist, artistsMessage, errorArtist } = this.props.PostDataArtistReducer;
     const { messageBoolAddSong, messageAddSong, errorBoolAddSong, errorAddSong } = this.props.postDataSongsReducer;
     const { errorUpgradeBool, errorUpgrade, messageUpgrade, messageUpgradeBool } = this.props.upgradeReducer;
+    const { messageDeleteSongBool, errorDeleteSongBool, messageDeleteSong, errorDeleteSong } = this.props.deleteSongReducer;
     return (
       <div>
         {/* REGISTER SNACK*/}
@@ -130,6 +136,33 @@ class snackBar extends Component {
           </Alert>
         </Snackbar>
         {/* UPGRADE SNACK */}
+
+        {/* ////////////////////////////////////////////////////////////////// */}
+
+        {/* DELETE SONG SNACK*/}
+        {/* SUCCESS */}
+        <Snackbar
+          open={messageDeleteSongBool}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearMessageDeleteSongAction}
+        >
+          <Alert onClose={this.props.clearMessageDeleteSongAction} severity='success'>
+            {messageDeleteSong ? messageDeleteSong : 'success'}
+          </Alert>
+        </Snackbar>
+        {/* ERROR */}
+        <Snackbar
+          open={errorDeleteSongBool}
+          anchorOrigin={{ vertical, horizontal }}
+          autoHideDuration={6000}
+          onClose={this.props.clearErrorDeleteSongAction}
+        >
+          <Alert onClose={this.props.clearErrorDeleteSongAction} severity='error'>
+            {errorDeleteSong ? errorDeleteSong : messageDeleteSong ? messageDeleteSong : 'error'}
+          </Alert>
+        </Snackbar>
+        {/* DELETE SONG SNACK */}
       </div>
     );
   }
@@ -141,6 +174,7 @@ const mapStateToProps = (state) => {
     PostDataArtistReducer: state.PostDataArtistReducer,
     postDataSongsReducer: state.postDataSongsReducer,
     upgradeReducer: state.upgradeReducer,
+    deleteSongReducer: state.deleteSongReducer,
   };
 };
 
@@ -153,4 +187,6 @@ export default connect(mapStateToProps, {
   clearErrorAddSong,
   clearMessageUpgrade,
   clearErrorUpgrade,
+  clearMessageDeleteSongAction,
+  clearErrorDeleteSongAction,
 })(snackBar);
