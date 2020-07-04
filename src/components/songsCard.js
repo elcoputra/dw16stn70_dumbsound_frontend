@@ -35,10 +35,9 @@ class songsCard extends Component {
   updateButton = (id, title, artist, year, thumbnailLink, musicLink) => {
     this.props.openModalSongUpdateAction(id, title, artist, year, thumbnailLink, musicLink);
   };
-  deleteButton = (id) => {
-    console.log(id);
-    this.props.deleteSongAction(id);
-    this.props.getDataSongsAction();
+  deleteButton = async (id) => {
+    await this.props.deleteSongAction(id);
+    await this.props.getDataSongsAction();
   };
 
   onHoverItem(id, title, artist, year, thumbnailLink, musicLink) {
