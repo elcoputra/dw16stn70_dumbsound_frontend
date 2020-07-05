@@ -10,13 +10,6 @@ and record labels.
 
 [Go to backend](https://github.com/elcoputra/dw16stn70_dumbsound_backend)
 
-  
-
-# Screenshoot
-
-![ss](https://raw.githubusercontent.com/elcoputra/dw16stn70_dumbsound_frontend/master/SS/all.png)
-![Update delete (admin only)](https://i.imgur.com/DnG0l6K.gif)
-
 ## Current Status
 
 PROTOTYPE
@@ -50,3 +43,8 @@ Start
 - ~~Delete Music~~
 - ~~Search Music~~
 - ~~Update Music~~
+
+# Screenshoot
+
+![ss](https://raw.githubusercontent.com/elcoputra/dw16stn70_dumbsound_frontend/master/SS/all.png)
+![Update delete (admin only)](https://i.imgur.com/DnG0l6K.gif)
