@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { clearPlaylist } from '../redux/actions/song_actions';
 import { getArtistBySongAction } from '../redux/actions/artist_action';
@@ -36,7 +35,7 @@ class musicPlayer extends Component {
     return (
       <div>
         {/* {console.log(song.musicLink)} */}
-        {this.state.musicPlayerShow && userState.subscribe && song.length > 0 ? (
+        {!userState ? null : this.state.musicPlayerShow && userState.subscribe && song.length > 0 ? (
           <ReactJkMusicPlayer
             mode='full'
             theme='dark'

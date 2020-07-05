@@ -24,6 +24,9 @@ import {
   UPDATE_SONGS_REQUEST,
   UPDATE_SONGS_SUCCSESS,
   UPDATE_SONGS_ERROR,
+  SEARCH_SONGS_REQUEST,
+  SEARCH_SONGS_SUCCESS,
+  SEARCH_SONGS_ERROR,
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
@@ -63,7 +66,7 @@ export function getDataSongsAction() {
       type: GET_SONGS_REQUEST,
     });
     API.get('/songs')
-      .then((response) => dispatch({ type: GET_SONGS_SUCCSESS, payload: response.data.data }))
+      .then((response) => dispatch({ type: GET_SONGS_SUCCSESS, payload: response.data.data, messageBool: false }))
       .catch((response) =>
         dispatch({
           type: GET_SONGS_ERROR,
@@ -126,7 +129,7 @@ export function deleteSongAction(id) {
     } catch (error) {
       dispatch({
         type: DELETE_SONGS_ERROR,
-        payload: error.response,
+        payload: error.response.data.error,
       });
     }
   };
@@ -173,7 +176,25 @@ export function updateSongAction(id, data) {
     } catch (error) {
       dispatch({
         type: UPDATE_SONGS_ERROR,
-        payload: error.response,
+        payload: error.response.data.error,
+      });
+    }
+  };
+}
+export function searchSongsAction(search) {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: SEARCH_SONGS_REQUEST,
+      });
+      const searchData = { search: search };
+      console.log(searchData);
+      const response = await API.post('/song/searches/', searchData);
+      dispatch({ type: SEARCH_SONGS_SUCCESS, payload: response.data.data, message: response.data.message, messageBool: true });
+    } catch (error) {
+      dispatch({
+        type: SEARCH_SONGS_ERROR,
+        payload: error.response.data.error,
       });
     }
   };

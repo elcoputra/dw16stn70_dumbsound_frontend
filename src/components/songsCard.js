@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Card, CardActionArea, Typography, Box, IconButton, Button } from '@material-ui/core';
+import { Grid, Card, CardActionArea, Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import {
@@ -19,9 +19,6 @@ class songsCard extends Component {
       mouseHover: false,
       idMouseHover: 0,
     };
-  }
-  componentDidMount() {
-    this.props.getDataSongsAction();
   }
 
   onMouseEnterHandler = (id) => {
@@ -89,7 +86,7 @@ class songsCard extends Component {
 
   render(props) {
     const { classes } = this.props;
-    const { songs, loading } = this.props.getDataSongsReducer;
+    const { songs, loading, message, messageBool } = this.props.getDataSongsReducer;
     const { userState } = this.props.authReducer;
     return (
       <div>
@@ -99,7 +96,11 @@ class songsCard extends Component {
           <Grid className={classes.gridBase} container direction='column' justify='flex-start' alignItems='flex-start'>
             <Grid item xs classes={{ root: classes.rootGridTitle }}>
               <Grid container spacing={0} direction='row' alignItems='center' justify='center'>
-                <b className={classes.title}>Dengarkan Dan Rasakan</b>
+                {messageBool === true ? (
+                  <b className={classes.title}>{message}</b>
+                ) : (
+                  <b className={classes.title}>Dengarkan Dan Rasakan</b>
+                )}
               </Grid>
             </Grid>
             <Grid item xs>
@@ -111,54 +112,59 @@ class songsCard extends Component {
                 justify='flex-start'
                 alignItems='flex-start'
               >
-                {songs.slice(this.props.init, this.props.end).map((detailData) => {
-                  return (
-                    <div className={classes.Div}>
-                      <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
-                        <div>
-                          {this.state.mouseHover && detailData.id === this.state.idMouseHover && userState.isAdmin ? (
-                            this.onHoverItem(
-                              detailData.id,
-                              detailData.title,
-                              detailData.artist.name,
-                              detailData.year,
-                              detailData.thumbnailLink,
-                              detailData.musicLink,
-                            )
-                          ) : (
-                            <Card classes={{ root: classes.rootCard }} className={classes.Card}>
-                              <CardActionArea
-                                onClick={
-                                  userState.isAdmin || userState.subscribe
-                                    ? () => this.props.getDetailSongAction(detailData.id)
-                                    : null
-                                }
-                                className={classes.CardActionArea}
-                              >
-                                <Link className={classes.Link}>
-                                  <div className={classes.divImg}>
-                                    <img src={detailData.thumbnailLink} alt={detailData.title} className={classes.Img} />
-                                  </div>
-                                  <Grid container direction='row' justify='space-around' alignItems='center'>
-                                    <Grid xs>
-                                      <Typography noWrap className={classes.TypographyTitle}>
-                                        {detailData.title}
-                                      </Typography>
-                                    </Grid>
-                                    <Grid xs>
-                                      <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
-                                    </Grid>
-                                  </Grid>
-                                  <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
-                                </Link>
-                              </CardActionArea>
-                            </Card>
-                          )}
-                        </div>
-                      </Grid>
-                    </div>
-                  );
-                })}
+                {songs
+                  ? songs
+                      .reverse()
+                      .slice(this.props.init, this.props.end)
+                      .map((detailData) => {
+                        return (
+                          <div className={classes.Div}>
+                            <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
+                              <div>
+                                {this.state.mouseHover && detailData.id === this.state.idMouseHover && userState.isAdmin ? (
+                                  this.onHoverItem(
+                                    detailData.id,
+                                    detailData.title,
+                                    detailData.artist.name,
+                                    detailData.year,
+                                    detailData.thumbnailLink,
+                                    detailData.musicLink,
+                                  )
+                                ) : (
+                                  <Card classes={{ root: classes.rootCard }} className={classes.Card}>
+                                    <CardActionArea
+                                      onClick={
+                                        userState.isAdmin || userState.subscribe
+                                          ? () => this.props.getDetailSongAction(detailData.id)
+                                          : null
+                                      }
+                                      className={classes.CardActionArea}
+                                    >
+                                      <Link className={classes.Link}>
+                                        <div className={classes.divImg}>
+                                          <img src={detailData.thumbnailLink} alt={detailData.title} className={classes.Img} />
+                                        </div>
+                                        <Grid container direction='row' justify='space-around' alignItems='center'>
+                                          <Grid xs>
+                                            <Typography noWrap className={classes.TypographyTitle}>
+                                              {detailData.title}
+                                            </Typography>
+                                          </Grid>
+                                          <Grid xs>
+                                            <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
+                                          </Grid>
+                                        </Grid>
+                                        <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
+                                      </Link>
+                                    </CardActionArea>
+                                  </Card>
+                                )}
+                              </div>
+                            </Grid>
+                          </div>
+                        );
+                      })
+                  : null}
               </Grid>
             </Grid>
           </Grid>

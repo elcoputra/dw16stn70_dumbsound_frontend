@@ -1,20 +1,330 @@
 import React, { Component } from 'react';
-import { AppBar, Box, Toolbar, Button, Grid, Avatar } from '@material-ui/core';
+
+import { AppBar, Toolbar, Button, Grid, Avatar } from '@material-ui/core';
+import { PersonOutline, Payment, ExitToApp, Receipt, Album, EmojiPeople, Search } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
+
+import { Redirect } from 'react-router-dom';
+
 import LOGO from '../img/dumbsound.png';
+import Segitiga from '../img/decor/segitiga.png';
+
 import LoginModal from './loginModal';
 import RegisterModal from './registerModal';
+
 import { Link } from 'react-router-dom';
-import Segitiga from '../img/decor/segitiga.png';
-import { PersonOutline, Payment, ExitToApp, Movie, Receipt, Album, EmojiPeople } from '@material-ui/icons';
+import ModalDetailArtist from '../components/modalDetailArtist';
+
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+
 import { openModalRegister, openModalLogin } from '../redux/actions/modal_actions';
 import { authAction, logoutUser } from '../redux/actions/auth_action';
-import ModalDetailArtist from '../components/modalDetailArtist';
+
+import { searchSongsAction, clearPlaylist } from '../redux/actions/song_actions';
+
+class nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+      isAdmin: false,
+      isMenu: false,
+      scrolling: 0,
+      inputSearch: '',
+      redirect: false,
+    };
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+    const isLogin = localStorage.getItem('isLogin');
+    const isAdmin = localStorage.getItem('isAdmin');
+    if (isLogin === 'false') {
+      this.setState({
+        isLogin: false,
+      });
+    }
+    if (isAdmin === 'false') {
+      this.setState({
+        isAdmin: false,
+      });
+    }
+    if (isLogin === 'true') {
+      this.setState({
+        isLogin: true,
+      });
+    }
+    if (isAdmin === 'true') {
+      this.setState({
+        isAdmin: true,
+      });
+    }
+    // Fungsi detetct scroll
+    window.onscroll = () => {
+      this.setState({
+        scrolling: window.pageYOffset,
+      });
+    };
+  }
+  // fungsi stop event saat scroll berhenti
+  componentWillUnmount() {
+    window.onscroll = null;
+  }
+
+  dropdownMenu = () => {
+    if (this.state.isMenu === false) {
+      this.setState({
+        isMenu: true,
+      });
+    } else {
+      this.setState({
+        isMenu: false,
+      });
+    }
+  };
+
+  logutAccount = () => {
+    localStorage.removeItem('token');
+    this.setState({
+      isMenu: false,
+    });
+    this.props.clearPlaylist();
+    this.props.logoutUser();
+  };
+  logutAdminAccount = () => {
+    localStorage.removeItem('token');
+    this.setState({
+      isMenu: false,
+    });
+    this.props.logoutUser();
+  };
+
+  loginAdmin = () => {
+    if (this.state.isAdmin === false) {
+      localStorage.setItem('isAdmin', true);
+      localStorage.setItem('isLogin', false);
+      this.getDataLocalStorage();
+    } else {
+      localStorage.setItem('isAdmin', false);
+      localStorage.setItem('isLogin', false);
+      this.getDataLocalStorage();
+    }
+  };
+
+  // ngambil data localstorage
+  getDataLocalStorage = () => {
+    const isLogin = localStorage.getItem('isLogin');
+    const isAdmin = localStorage.getItem('isAdmin');
+    if (isLogin === 'false') {
+      this.setState({
+        isLogin: false,
+      });
+    }
+    if (isAdmin === 'false') {
+      this.setState({
+        isAdmin: false,
+      });
+    }
+    if (isLogin === 'true') {
+      this.setState({
+        isLogin: true,
+      });
+    }
+    if (isAdmin === 'true') {
+      this.setState({
+        isAdmin: true,
+      });
+    }
+
+    console.log(isLogin, isAdmin);
+  };
+
+  handleConfirmSearch = async (event) => {
+    if (event.key === 'Enter') {
+      if (this.state.inputSearch === '') {
+      } else {
+        await this.props.searchSongsAction(this.state.inputSearch);
+        await this.setState({ redirect: true });
+        await this.setState({ redirect: false });
+      }
+    }
+  };
+  handleChangeText = (event) => {
+    this.setState({ inputSearch: event.target.value });
+  };
+
+  render(props) {
+    const { classes } = this.props;
+    const { userState, loading } = this.props.authReducer;
+    const isLoginUserState = userState ? userState.isLogin : false;
+    const isAdminState = userState ? userState.isAdmin : false;
+    return (
+      <div className={classes.divRoot}>
+        {this.state.redirect ? <Redirect to={'/search'} /> : null}
+        <LoginModal sendDataIsLogin={this.getDataFromModalComponent} ref={this.loginModalRef}></LoginModal>
+        <RegisterModal ref={this.RegisterModalRef}></RegisterModal>
+        <ModalDetailArtist />
+        <AppBar className={this.state.scrolling >= 100 ? classes.AppBarScrool : classes.AppBar}>
+          <Toolbar className={classes.Toolbar}>
+            <Grid container direction='row' justify='left' alignItems='center'>
+              <Link className={classes.Link} to='/'>
+                <Button className={classes.ButtonAvatar}>
+                  <img src={LOGO} className={classes.imgLogo} alt='Brand' />
+                </Button>
+              </Link>
+            </Grid>
+            {isLoginUserState ? (
+              <Grid container direction='row' justify='left' alignItems='center'>
+                <input
+                  value={this.state.inputSearch}
+                  onKeyPress={(event) => this.handleConfirmSearch(event)}
+                  onChange={(event) => this.handleChangeText(event)}
+                  placeholder='Search...'
+                  className={classes.searchBox}
+                />
+              </Grid>
+            ) : null}
+            <Grid container direction='row' justify='flex-end' alignItems='center'>
+              {/* AVA dan dropdown menu client, serta logic button login register untuk client dan admin */}
+              {isLoginUserState && !isAdminState ? (
+                <div>
+                  <Button onClick={this.dropdownMenu} className={classes.ButtonAvatar}>
+                    <Avatar alt='Elco Lebih Ganteng' src='https://i.imgur.com/WcVXGbM.jpg' className={classes.Avatar} />
+                  </Button>
+                  {this.state.isMenu ? (
+                    <div className={classes.divBase}>
+                      <div className={classes.divBaseFloatingDecor}>
+                        <img src={Segitiga} alt='segitiga' />
+                      </div>
+                      <div className={userState.subscribe ? classes.divBaseFloatingMenuNoPay : classes.divBaseFloatingMenu}>
+                        <Link className={classes.Link} to='/profile'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuProfile}>
+                            <PersonOutline className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Profile</b>
+                          </Button>
+                        </Link>
+                        {userState.subscribe ? null : (
+                          <Link className={classes.Link} to='/upgrade'>
+                            <Button onClick={this.dropdownMenu} className={classes.buttonMenuPay}>
+                              <Payment className={classes.IconMenu} />
+                              <b className={classes.LabelMenu}>Pay</b>
+                            </Button>
+                          </Link>
+                        )}
+
+                        <Button className={classes.buttonMenuPay}></Button>
+                        <div className={classes.borderMenuDropdown}></div>
+                        <Link className={classes.Link} to='/'>
+                          <Button onClick={this.logutAccount} className={classes.buttonMenuLogout}>
+                            <ExitToApp className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Logout</b>
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              ) : (
+                <div>
+                  {isAdminState ? (
+                    <div></div>
+                  ) : loading ? (
+                    'AUTHENTICATING ....'
+                  ) : (
+                    <>
+                      <Button onClick={this.props.openModalRegister} variant='contained' className={classes.ButtonRegister}>
+                        Register
+                      </Button>
+
+                      <Button
+                        onClick={this.props.openModalLogin}
+                        variant='contained'
+                        color='secondary'
+                        className={classes.ButtonLogin}
+                      >
+                        Login
+                      </Button>
+                    </>
+                  )}
+                </div>
+              )}
+              {/* Aavatar dan dropdown menu untu admin */}
+              {isAdminState ? (
+                <div>
+                  {/* Search and avatar */}
+                  <Button onClick={this.dropdownMenu} className={classes.ButtonAvatar}>
+                    <Avatar alt='Lisa Pacar Elco' src='https://i.imgur.com/woAAzCF.jpg' className={classes.Avatar} />
+                  </Button>
+                  {this.state.isMenu ? (
+                    <div className={classes.divBase}>
+                      <div className={classes.divBaseFloatingDecor}>
+                        <img src={Segitiga} alt='segitiga' />
+                      </div>
+                      <div className={classes.divBaseFloatingMenuAdmin}>
+                        <Link className={classes.Link} to='/add-artist'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
+                            <EmojiPeople className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Add Artist</b>
+                            <div className={classes.divSpacerMenuAddArtist} />
+                          </Button>
+                        </Link>
+                        <Link className={classes.Link} to='/add-song'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
+                            <Album className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Add Song</b>
+                            <div className={classes.divSpacerMenuAddSong} />
+                          </Button>
+                        </Link>
+                        <Link className={classes.Link} to='/transactions'>
+                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
+                            <Receipt className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Transactions</b>
+                          </Button>
+                        </Link>
+                        <Button className={classes.buttonMenuPay}></Button>
+                        <div className={classes.borderMenuDropdown}></div>
+                        <Link className={classes.Link} to='/'>
+                          <Button onClick={this.logutAdminAccount} className={classes.buttonMenuLogout}>
+                            <ExitToApp className={classes.IconMenu} />
+                            <b className={classes.LabelMenu}>Logout</b>
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              ) : (
+                <></>
+              )}
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
 
 const styles = (theme) => ({
   marginAutoItem: {},
+  searchBox: {
+    outline: 0,
+    width: '100%',
+    height: 30,
+    backgroundColor: '#4C4C4C',
+    color: 'white',
+    borderRadius: 5,
+    border: '2px solid white',
+    paddingLeft: 10,
+    paddingRight: 10,
+    '&:focus': {
+      border: '2px solid #EE4622',
+      height: 40,
+    },
+  },
   divBase: {
     position: 'relative',
     width: 'auto',
@@ -155,275 +465,22 @@ const styles = (theme) => ({
   },
 });
 
-class nav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false,
-      isAdmin: false,
-      isMenu: false,
-      scrolling: 0,
-    };
-
-    // this.getDataFromModalComponent = this.getDataFromModalComponent.bind(this);
-  }
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-    const isLogin = localStorage.getItem('isLogin');
-    const isAdmin = localStorage.getItem('isAdmin');
-    if (isLogin === 'false') {
-      this.setState({
-        isLogin: false,
-      });
-    }
-    if (isAdmin === 'false') {
-      this.setState({
-        isAdmin: false,
-      });
-    }
-    if (isLogin === 'true') {
-      this.setState({
-        isLogin: true,
-      });
-    }
-    if (isAdmin === 'true') {
-      this.setState({
-        isAdmin: true,
-      });
-    }
-    // Fungsi detetct scroll
-    window.onscroll = () => {
-      this.setState({
-        scrolling: window.pageYOffset,
-      });
-    };
-  }
-  // fungsi stop event saat scroll berhenti
-  componentWillUnmount() {
-    window.onscroll = null;
-  }
-
-  dropdownMenu = () => {
-    if (this.state.isMenu === false) {
-      this.setState({
-        isMenu: true,
-      });
-    } else {
-      this.setState({
-        isMenu: false,
-      });
-    }
-  };
-
-  logutAccount = () => {
-    localStorage.removeItem('token');
-    this.setState({
-      isMenu: false,
-    });
-    this.props.logoutUser();
-  };
-  logutAdminAccount = () => {
-    localStorage.removeItem('token');
-    this.setState({
-      isMenu: false,
-    });
-    this.props.logoutUser();
-  };
-
-  loginAdmin = () => {
-    if (this.state.isAdmin === false) {
-      localStorage.setItem('isAdmin', true);
-      localStorage.setItem('isLogin', false);
-      this.getDataLocalStorage();
-    } else {
-      localStorage.setItem('isAdmin', false);
-      localStorage.setItem('isLogin', false);
-      this.getDataLocalStorage();
-    }
-  };
-
-  // ngambil data localstorage
-  getDataLocalStorage = () => {
-    const isLogin = localStorage.getItem('isLogin');
-    const isAdmin = localStorage.getItem('isAdmin');
-    if (isLogin === 'false') {
-      this.setState({
-        isLogin: false,
-      });
-    }
-    if (isAdmin === 'false') {
-      this.setState({
-        isAdmin: false,
-      });
-    }
-    if (isLogin === 'true') {
-      this.setState({
-        isLogin: true,
-      });
-    }
-    if (isAdmin === 'true') {
-      this.setState({
-        isAdmin: true,
-      });
-    }
-
-    console.log(isLogin, isAdmin);
-  };
-
-  render(props) {
-    const { classes } = this.props;
-    const { isLogin } = this.props.userReducer;
-    const { userState, loading } = this.props.authReducer;
-    const isLoginUserState = userState ? userState.isLogin : false;
-    const isAdminState = userState ? userState.isAdmin : false;
-    return (
-      <div className={classes.divRoot}>
-        <LoginModal sendDataIsLogin={this.getDataFromModalComponent} ref={this.loginModalRef}></LoginModal>
-        <RegisterModal ref={this.RegisterModalRef}></RegisterModal>
-        <ModalDetailArtist />
-        <AppBar className={this.state.scrolling >= 100 ? classes.AppBarScrool : classes.AppBar}>
-          <Toolbar className={classes.Toolbar}>
-            <Grid container direction='row' justify='left' alignItems='center'>
-              <Link className={classes.Link} to='/'>
-                <Button className={classes.ButtonAvatar}>
-                  <img src={LOGO} className={classes.imgLogo} alt='Brand' />
-                </Button>
-              </Link>
-            </Grid>
-            <Grid container direction='row' justify='flex-end' alignItems='center'>
-              {/* AVA dan dropdown menu client, serta logic button login register untuk client dan admin */}
-              {isLoginUserState && !isAdminState ? (
-                <div>
-                  <Button onClick={this.dropdownMenu} className={classes.ButtonAvatar}>
-                    <Avatar alt='Elco Lebih Ganteng' src='https://i.imgur.com/WcVXGbM.jpg' className={classes.Avatar} />
-                  </Button>
-                  {this.state.isMenu ? (
-                    <div className={classes.divBase}>
-                      <div className={classes.divBaseFloatingDecor}>
-                        <img src={Segitiga} alt='segitiga' />
-                      </div>
-                      <div className={userState.subscribe ? classes.divBaseFloatingMenuNoPay : classes.divBaseFloatingMenu}>
-                        <Link className={classes.Link} to='/profile'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuProfile}>
-                            <PersonOutline className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Profile</b>
-                          </Button>
-                        </Link>
-                        {userState.subscribe ? null : (
-                          <Link className={classes.Link} to='/upgrade'>
-                            <Button onClick={this.dropdownMenu} className={classes.buttonMenuPay}>
-                              <Payment className={classes.IconMenu} />
-                              <b className={classes.LabelMenu}>Pay</b>
-                            </Button>
-                          </Link>
-                        )}
-
-                        <Button className={classes.buttonMenuPay}></Button>
-                        <div className={classes.borderMenuDropdown}></div>
-                        <Link className={classes.Link} to='/'>
-                          <Button onClick={this.logutAccount} className={classes.buttonMenuLogout}>
-                            <ExitToApp className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Logout</b>
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              ) : (
-                <div>
-                  {isAdminState ? (
-                    <div></div>
-                  ) : loading ? (
-                    'AUTHENTICATING ....'
-                  ) : (
-                    <>
-                      <Button onClick={this.props.openModalRegister} variant='contained' className={classes.ButtonRegister}>
-                        Register
-                      </Button>
-
-                      <Button
-                        onClick={this.props.openModalLogin}
-                        variant='contained'
-                        color='secondary'
-                        className={classes.ButtonLogin}
-                      >
-                        Login
-                      </Button>
-                    </>
-                  )}
-                </div>
-              )}
-              {/* Aavatar dan dropdown menu untu admin */}
-              {isAdminState ? (
-                <div>
-                  <Button onClick={this.dropdownMenu} className={classes.ButtonAvatar}>
-                    <Avatar alt='Lisa Pacar Elco' src='https://i.imgur.com/woAAzCF.jpg' className={classes.Avatar} />
-                  </Button>
-                  {this.state.isMenu ? (
-                    <div className={classes.divBase}>
-                      <div className={classes.divBaseFloatingDecor}>
-                        <img src={Segitiga} alt='segitiga' />
-                      </div>
-                      <div className={classes.divBaseFloatingMenuAdmin}>
-                        <Link className={classes.Link} to='/add-artist'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
-                            <EmojiPeople className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Add Artist</b>
-                            <div className={classes.divSpacerMenuAddArtist} />
-                          </Button>
-                        </Link>
-                        <Link className={classes.Link} to='/add-song'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
-                            <Album className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Add Song</b>
-                            <div className={classes.divSpacerMenuAddSong} />
-                          </Button>
-                        </Link>
-                        <Link className={classes.Link} to='/transactions'>
-                          <Button onClick={this.dropdownMenu} className={classes.buttonMenuAdmin}>
-                            <Receipt className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Transactions</b>
-                          </Button>
-                        </Link>
-                        <Button className={classes.buttonMenuPay}></Button>
-                        <div className={classes.borderMenuDropdown}></div>
-                        <Link className={classes.Link} to='/'>
-                          <Button onClick={this.logutAdminAccount} className={classes.buttonMenuLogout}>
-                            <ExitToApp className={classes.IconMenu} />
-                            <b className={classes.LabelMenu}>Logout</b>
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              ) : (
-                <></>
-              )}
-            </Grid>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
-}
 const mapStateToProps = (state) => {
   return {
     userReducer: state.userReducer,
     authReducer: state.authReducer,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openModalRegister: () => dispatch(openModalRegister()),
-    openModalLogin: () => dispatch(openModalLogin()),
-    authAction: () => dispatch(authAction()),
-    logoutUser: () => dispatch(logoutUser()),
-  };
-};
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(nav);
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     openModalRegister: () => dispatch(openModalRegister()),
+//     openModalLogin: () => dispatch(openModalLogin()),
+//     authAction: () => dispatch(authAction()),
+//     logoutUser: () => dispatch(logoutUser()),
+//     searchSongsAction: () => dispatch(searchSongsAction()),
+//   };
+// };
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { openModalRegister, openModalLogin, authAction, logoutUser, searchSongsAction, clearPlaylist }),
+)(nav);

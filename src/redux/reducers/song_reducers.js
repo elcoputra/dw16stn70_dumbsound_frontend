@@ -24,31 +24,43 @@ import {
   UPDATE_SONGS_REQUEST,
   UPDATE_SONGS_SUCCSESS,
   UPDATE_SONGS_ERROR,
+  SEARCH_SONGS_REQUEST,
+  SEARCH_SONGS_SUCCESS,
+  SEARCH_SONGS_ERROR,
 } from '../actionTypes';
 
 const initialstateSongs = {
   songs: [],
   loading: false,
+  message: 'Dengarkan Dan Rasakan',
+  messageBool: false,
   error: [],
 };
 
 export const getDataSongsReducer = (state = initialstateSongs, action) => {
   switch (action.type) {
     case GET_SONGS_REQUEST:
+    case SEARCH_SONGS_REQUEST:
       return {
         ...state,
         loading: true,
+        messageBool: false,
       };
     case GET_SONGS_SUCCSESS:
+    case SEARCH_SONGS_SUCCESS:
       return {
         ...state,
         loading: false,
+        messageBool: action.messageBool,
         songs: action.payload,
+        message: action.message,
       };
     case GET_SONGS_ERROR:
+    case SEARCH_SONGS_ERROR:
       return {
         ...state,
         loading: false,
+        messageBool: false,
         error: action.payload,
       };
     default:

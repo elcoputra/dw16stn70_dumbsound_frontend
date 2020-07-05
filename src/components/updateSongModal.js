@@ -138,6 +138,7 @@ const styles = (theme) => ({
     fontWeight: 'bold',
   },
   input: {
+    outline: 0,
     height: 50,
     width: '100%',
     borderRadius: 5,
@@ -154,6 +155,7 @@ const styles = (theme) => ({
     },
   },
   inputTextArea: {
+    outline: 0,
     minHeight: 50,
     maxWidth: '100%',
     minWidth: '100%',

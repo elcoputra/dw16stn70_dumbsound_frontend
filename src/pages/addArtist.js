@@ -38,6 +38,7 @@ const styles = (theme) => ({
     borderRadius: 5,
   },
   dropdownStyle: {
+    outline: 0,
     border: '2px solid white',
     backgroundColor: '#353535',
     fontColor: 'white',
@@ -49,11 +50,13 @@ const styles = (theme) => ({
       borderColor: 'white',
       labelColor: 'white',
       fontColor: 'white',
+      outline: 0,
     },
     '&:after': {
       borderColor: 'white',
       labelColor: 'white',
       fontColor: 'white',
+      outline: 0,
     },
   },
   iconDropdown: {

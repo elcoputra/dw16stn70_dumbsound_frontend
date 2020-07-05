@@ -12,6 +12,7 @@ import AddSong from './pages/addSongs';
 import SongsByArtist from './pages/songsByArtist';
 import Transaction from './pages/transactionPage';
 import SnackBar from '../src/components/snackBar';
+import SearchPage from '../src/pages/searchPage';
 import { authAction } from './redux/actions/auth_action';
 import { connect } from 'react-redux';
 
@@ -38,6 +39,7 @@ class App extends Component {
           <Navbar />
           <SnackBar />
           <Switch>
+            <PrivateRouteUser path='/search' component={SearchPage} />
             <PrivateRouteUser path='/artist/songs' component={SongsByArtist} />
             <PrivateRouteAdmin path='/transactions' component={Transaction} />
             <PrivateRouteAdmin path='/add-artist' component={AddArtist} />
