@@ -29,7 +29,9 @@ PROTOTYPE
 
 Create React App, Express.js, Material UI, Moment.Js, Hapi Joi, React Jingke Music Player, Redux, Redux Thunk, Axios, Bycript, Cors, Dotenv, Jsonwebtoken, Sequelize, MariaDB.
 
-  
+  ## Depedency
+  - node
+  - npm
 
 ## Starting project on your computer
 
