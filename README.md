@@ -1,4 +1,5 @@
 
+
 # Welcome to Dumbsound Web App!
 
   
@@ -44,6 +45,6 @@ Start
 
 ## Missing feature
 
-- Delete Music
-
-- Update Music
+- ~~Delete Music~~
+- ~~Search Music~~
+- ~~Update Music~~
