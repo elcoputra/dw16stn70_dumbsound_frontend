@@ -13,7 +13,8 @@ and record labels.
 
 # Screenshoot
 
-![ss](https://raw.githubusercontent.com/elcoputra/dw16stn70_dumbsound_frontend/master/SS/all.png)**Update Delete** *admin
+![ss](https://raw.githubusercontent.com/elcoputra/dw16stn70_dumbsound_frontend/master/SS/all.png)
+**Update Delete** *admin
 ![enter image description here](https://i.imgur.com/DnG0l6K.gif)
 
 ## Current Status
