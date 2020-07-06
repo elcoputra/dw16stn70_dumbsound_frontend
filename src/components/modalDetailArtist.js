@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, Backdrop, Fade, Box, Grid, Avatar, Typography, TextField, Button, Link } from '@material-ui/core';
+import { Modal, Backdrop, Fade, Box, Grid, Avatar, Typography, Button } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { clearModalArtistDetailAction } from '../redux/actions/artist_action';
@@ -83,7 +83,7 @@ class modalDetailArtist extends Component {
 
   render() {
     const { classes } = this.props;
-    const { artistDataBySong, loadingGetArtistBySong, errorGetArtistBySong, modalArtist } = this.props.getArtistBySongReducer;
+    const { artistDataBySong, modalArtist } = this.props.getArtistBySongReducer;
     return (
       <div>
         <Modal

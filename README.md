@@ -1,4 +1,4 @@
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a4961057-4cb0-461a-a797-4f67d440bec6/deploy-status)](https://app.netlify.com/sites/dumbsound/deploys)
 # Welcome to Dumbsound Web App!
 Dumbsound is a music streaming service, providing music from various countries, artists and record labels.
 [Go to backend](https://github.com/elcoputra/dw16stn70_dumbsound_backend)

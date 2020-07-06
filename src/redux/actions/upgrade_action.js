@@ -3,6 +3,7 @@ import { API } from '../../config/axiosConfig';
 
 export function upgradeAction(upgrade) {
   return function (dispatch) {
+    dispatch({ type: UPGRADE_REQUEST });
     API.post('/transaction', upgrade)
       .then((response) =>
         dispatch({
@@ -20,15 +21,11 @@ export function upgradeAction(upgrade) {
 }
 export function clearMessageUpgrade() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_UPGRADE_MESSAGE });
-    }
+    dispatch({ type: CLEAR_UPGRADE_MESSAGE });
   };
 }
 export function clearErrorUpgrade() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_UPGRADE_ERROR });
-    }
+    dispatch({ type: CLEAR_UPGRADE_ERROR });
   };
 }

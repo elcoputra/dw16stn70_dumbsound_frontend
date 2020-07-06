@@ -18,7 +18,6 @@ class snackBar extends Component {
     this.state = {};
   }
   render() {
-    const { classes } = this.props;
     const vertical = 'top';
     const horizontal = 'center';
     const { error, errorBool, message, messageBool } = this.props.userReducer;

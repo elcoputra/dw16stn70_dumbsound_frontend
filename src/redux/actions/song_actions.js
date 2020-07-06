@@ -49,9 +49,7 @@ export function postDataSongsAction(dataSong) {
 
 export function clearMessageAddSong() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_MESSAGE_ADD_SONG });
-    }
+    dispatch({ type: CLEAR_MESSAGE_ADD_SONG });
   };
 }
 export function clearErrorAddSong() {

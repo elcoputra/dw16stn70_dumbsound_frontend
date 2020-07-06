@@ -61,13 +61,6 @@ const styles = (theme) => ({
     fontSize: 40,
     color: 'white',
   },
-  dropdownStyle: {
-    border: '2px solid white',
-    backgroundColor: '#353535',
-    fontColor: 'white',
-    color: 'white',
-    laberColor: 'white',
-  },
   inputProps: {
     color: 'white',
     '&:before': {

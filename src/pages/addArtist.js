@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  TextareaAutosize,
-  Backdrop,
-  Fade,
-  TextField,
-  Grid,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@material-ui/core';
+import { TextareaAutosize, TextField, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getDataTypesAction } from '../redux/actions/types_action';
@@ -279,7 +268,7 @@ class addArtist extends Component {
 
   render(props) {
     const { classes } = this.props;
-    const { types, loadingTypes, errorTypes } = this.props.getDataTypesReducer;
+    const { types, loadingTypes } = this.props.getDataTypesReducer;
     return (
       <div className={classes.divBase}>
         <div className={classes.divider} />

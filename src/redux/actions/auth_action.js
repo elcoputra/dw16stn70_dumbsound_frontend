@@ -36,9 +36,7 @@ export function authAction(input) {
 }
 export function logoutUser() {
   return function (dispatch) {
-    {
-      dispatch({ type: LOGOUT_USER });
-      dispatch(clearUserData());
-    }
+    dispatch({ type: LOGOUT_USER });
+    dispatch(clearUserData());
   };
 }

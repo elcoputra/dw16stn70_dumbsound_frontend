@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { AppBar, Toolbar, Button, Grid, Avatar } from '@material-ui/core';
-import { PersonOutline, Payment, ExitToApp, Receipt, Album, EmojiPeople, Search } from '@material-ui/icons';
+import { PersonOutline, Payment, ExitToApp, Receipt, Album, EmojiPeople } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
 import { Redirect } from 'react-router-dom';
@@ -471,15 +471,6 @@ const mapStateToProps = (state) => {
     authReducer: state.authReducer,
   };
 };
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     openModalRegister: () => dispatch(openModalRegister()),
-//     openModalLogin: () => dispatch(openModalLogin()),
-//     authAction: () => dispatch(authAction()),
-//     logoutUser: () => dispatch(logoutUser()),
-//     searchSongsAction: () => dispatch(searchSongsAction()),
-//   };
-// };
 export default compose(
   withStyles(styles),
   connect(mapStateToProps, { openModalRegister, openModalLogin, authAction, logoutUser, searchSongsAction, clearPlaylist }),

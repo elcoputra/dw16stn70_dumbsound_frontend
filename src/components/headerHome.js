@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import HeaderImage from '../img/header/panggung.png';
-import logoHeaderImage from '../img/header/YourName-logo-width-bw-invert.png';
-import gradientImage from '../img/header/Rectangle.png';
 
 const styles = (theme) => ({
   BoxBase: {

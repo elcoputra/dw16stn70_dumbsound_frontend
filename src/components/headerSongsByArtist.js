@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Box, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import HeaderImage from '../img/header/panggung.png';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 

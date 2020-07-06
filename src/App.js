@@ -26,11 +26,11 @@ class App extends Component {
     const PrivateRouteAdmin = ({ component: Component, ...rest }) => (
       <Route
         {...rest}
-        render={(props) => (userState.isAdmin && userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)}
+        render={(props) => (userState && userState.isAdmin && userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)}
       />
     );
     const PrivateRouteUser = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)} />
+      <Route {...rest} render={(props) => (userState && userState.isLogin ? <Component {...props} /> : <Redirect to='/' />)} />
     );
     return (
       <Router>

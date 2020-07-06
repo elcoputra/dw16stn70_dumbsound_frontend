@@ -114,7 +114,7 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.fullName}</div>
+                            {loading ? 'Loading . . .' : <div className={classes.data}>{userState.fullName}</div>}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Full Name
@@ -141,7 +141,7 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.email}</div>
+                            {loading ? 'Loading . . .' : <div className={classes.data}>{userState.email}</div>}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Email
@@ -168,7 +168,11 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.subscribe ? 'Active' : 'Not Active'}</div>
+                            {loading ? (
+                              'loading . . .'
+                            ) : (
+                              <div className={classes.data}>{userState.subscribe ? 'Active' : 'Not Active'}</div>
+                            )}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Subscribe
@@ -195,7 +199,7 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.gender}</div>
+                            {loading ? 'Loading . . . ' : <div className={classes.data}>{userState.gender}</div>}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Gender
@@ -222,7 +226,7 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.phone}</div>
+                            {loading ? 'Loading . . .' : <div className={classes.data}>{userState.phone}</div>}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Mobile Number
@@ -249,7 +253,7 @@ class profilePage extends Component {
                         {/* CONTAINER COLUMN BUAT TEXT */}
                         <Grid container justify='flex-start' direction='column'>
                           <Grid item xs>
-                            <div className={classes.data}>{userState.address}</div>
+                            {loading ? 'Loading . . .' : <div className={classes.data}>{userState.address}</div>}
                           </Grid>
                           <Grid item xs className={classes.info}>
                             Address

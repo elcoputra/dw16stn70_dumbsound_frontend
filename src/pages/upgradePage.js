@@ -5,10 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { upgradeAction } from '../redux/actions/upgrade_action';
-import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
-
-import { Redirect } from 'react-router-dom';
 
 const styles = (theme) => ({
   divBase: {
@@ -160,7 +157,7 @@ class upgradePage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { error, loading } = this.props.upgradeReducer;
+    const { error } = this.props.upgradeReducer;
     const errorHandling = error && error.data ? error.data.error : null;
     const errorMessageHandling = error && error.data ? error.data.message : null;
     return (

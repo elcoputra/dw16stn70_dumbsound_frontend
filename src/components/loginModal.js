@@ -8,80 +8,6 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-const styles = (theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    outline: 'none',
-  },
-  Box: {
-    backgroundColor: 'black',
-    opacity: '100%',
-    width: '416px',
-    height: '408px',
-    borderRadius: '10px',
-
-    paddingTop: '30px',
-    paddingBottom: '30px',
-    paddingLeft: '25px',
-    paddingRight: '25px',
-  },
-  Title: {
-    color: '#FFFFFF',
-    fontSize: '36px',
-  },
-  GridInput: {
-    color: '#B1B1B1',
-  },
-  textField: {
-    background: 'rgba(210, 210, 210, 0.25)',
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 350,
-  },
-
-  cssLabel: {
-    color: '#B1B1B1',
-  },
-
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: `red !important`,
-    },
-  },
-
-  cssFocused: {
-    color: 'white',
-  },
-
-  notchedOutline: {
-    borderWidth: '2px',
-    borderColor: 'white !important',
-  },
-  ButtonLogin: {
-    height: '50px',
-    width: '350px',
-    fontSize: '18pxx',
-    background: '#E50914',
-    marginTop: '10px',
-    color: 'white',
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#870303',
-    },
-  },
-  GridClickHere: {
-    marginTop: '50px',
-  },
-  LinkCliclHere: {
-    color: 'red',
-  },
-  errorResponse: {
-    color: 'white',
-  },
-});
-
 class loginModal extends Component {
   constructor(props, context) {
     super(props, context);
@@ -110,7 +36,7 @@ class loginModal extends Component {
 
   render() {
     const { classes } = this.props;
-    const { error, isLogin } = this.props.userReducer;
+    const { error } = this.props.userReducer;
     const { userState, loading } = this.props.authReducer;
 
     const errorHandling = error && error.data ? error.data.error : null;
@@ -215,6 +141,80 @@ class loginModal extends Component {
     );
   }
 }
+const styles = (theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    outline: 'none',
+  },
+  Box: {
+    backgroundColor: 'black',
+    opacity: '100%',
+    width: '416px',
+    height: '408px',
+    borderRadius: '10px',
+
+    paddingTop: '30px',
+    paddingBottom: '30px',
+    paddingLeft: '25px',
+    paddingRight: '25px',
+  },
+  Title: {
+    color: '#FFFFFF',
+    fontSize: '36px',
+  },
+  GridInput: {
+    color: '#B1B1B1',
+  },
+  textField: {
+    background: 'rgba(210, 210, 210, 0.25)',
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 350,
+  },
+
+  cssLabel: {
+    color: '#B1B1B1',
+  },
+
+  cssOutlinedInput: {
+    '&$cssFocused $notchedOutline': {
+      borderColor: `red !important`,
+    },
+  },
+
+  cssFocused: {
+    color: 'white',
+  },
+
+  notchedOutline: {
+    borderWidth: '2px',
+    borderColor: 'white !important',
+  },
+  ButtonLogin: {
+    height: '50px',
+    width: '350px',
+    fontSize: '18pxx',
+    background: '#E50914',
+    marginTop: '10px',
+    color: 'white',
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#870303',
+    },
+  },
+  GridClickHere: {
+    marginTop: '50px',
+  },
+  LinkCliclHere: {
+    color: 'red',
+  },
+  errorResponse: {
+    color: 'white',
+  },
+});
+
 const mapStateToProps = (state) => {
   return {
     modalLogin: state.modalLoginReducer.loginModalOpen,

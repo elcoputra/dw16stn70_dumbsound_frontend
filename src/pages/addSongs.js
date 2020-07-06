@@ -7,256 +7,6 @@ import { getDataArtistAction } from '../redux/actions/artist_action';
 import { postDataSongsAction } from '../redux/actions/song_actions';
 import { AttachFile } from '@material-ui/icons';
 
-const styles = (theme) => ({
-  // Styling Dropdown
-  root: {
-    fontColor: 'white',
-    color: 'white',
-    labelColor: 'white',
-  },
-
-  formControl: {
-    marginTop: 15,
-    marginBottom: 15,
-    marginLeft: 5,
-    height: 50,
-    width: 1161,
-    border: '2px solid white',
-    fontColor: 'white',
-    color: 'white',
-    backgroundColor: 'rgba(210, 210, 210, 0.25)',
-    laberColor: 'white',
-    borderRadius: 5,
-  },
-  dropdownStyle: {
-    border: '2px solid white',
-    backgroundColor: '#353535',
-    fontColor: 'white',
-    color: 'white',
-    laberColor: 'white',
-  },
-  select: {
-    '&:before': {
-      borderColor: 'white',
-      labelColor: 'white',
-      fontColor: 'white',
-    },
-    '&:after': {
-      borderColor: 'white',
-      labelColor: 'white',
-      fontColor: 'white',
-    },
-  },
-  iconDropdown: {
-    fill: 'white',
-  },
-  // End Styling Dropdown
-
-  divGrid: {
-    width: 1150,
-    height: 2222,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-    color: 'white',
-    fontColor: 'white',
-  },
-  divider: {
-    height: 50,
-  },
-  divWarping: {
-    backgroundColor: 'green',
-    color: 'white',
-  },
-  textField: {
-    background: 'rgba(210, 210, 210, 0.25)',
-    marginLeft: 4,
-    marginRight: theme.spacing.unit,
-    width: 935,
-    height: 50,
-  },
-  textFieldInsertLinkThumbnailEpisode: {
-    background: 'rgba(210, 210, 210, 0.25)',
-    width: 211,
-    height: 50,
-  },
-  textField3: {
-    background: 'rgba(210, 210, 210, 0.25)',
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 927,
-    height: 50,
-  },
-  textField2: {
-    background: 'rgba(210, 210, 210, 0.25)',
-    width: 1157,
-    height: 50,
-    marginLeft: 4,
-  },
-  cssLabel: {
-    color: '#B1B1B1',
-  },
-
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: `red !important`,
-      color: `white !important`,
-    },
-  },
-
-  cssFocused: {
-    color: 'white',
-    textColor: 'white',
-  },
-
-  notchedOutline: {
-    borderWidth: '2px',
-    borderColor: 'white !important',
-  },
-  floatingLabelFocusStyle: {
-    color: 'white',
-  },
-  ButtonAttatch: {
-    textTransform: 'none',
-    marginTop: 13,
-    height: 55,
-    width: 213,
-    fontSize: '14px',
-    background: 'rgba(210, 210, 210, 0.25)',
-    color: '#B1B1B1',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderWidth: 2,
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#E50914',
-      color: 'white',
-    },
-  },
-  ButtonAttatchSong: {
-    textTransform: 'none',
-    marginRight: 943,
-    height: 55,
-    width: 213,
-    fontSize: '14px',
-    background: 'rgba(210, 210, 210, 0.25)',
-    color: '#B1B1B1',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderWidth: 2,
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#E50914',
-      color: 'white',
-    },
-  },
-  ButtonAddForm: {
-    textTransform: 'none',
-    marginTop: 13,
-    marginLeft: 9,
-    height: 30,
-    width: 1150,
-    fontSize: '14px',
-    background: 'rgba(210, 210, 210, 0.25)',
-    color: 'red',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderWidth: 2,
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#E50914',
-      color: 'white',
-    },
-  },
-  ButtonSave: {
-    textTransform: 'none',
-    marginTop: 34,
-    height: 40,
-    width: 350,
-    fontSize: '14px',
-    background: '#F58033',
-    color: 'white',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderWidth: 2,
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#rgba(210, 210, 210, 0.25)',
-      color: 'red',
-    },
-  },
-  attatchText: {},
-  attatchIcon: {
-    paddingLeft: 4,
-    paddingTop: 11,
-  },
-  icon: {
-    fontSize: 40,
-  },
-  iconAddForm: {
-    fontSize: 40,
-  },
-  TextareaAutosize: {
-    marginTop: 5,
-    marginLeft: 1,
-    marginBottom: 30,
-    width: 1145,
-    color: 'white',
-    borderRadius: 5,
-    backgroundColor: '#353535',
-  },
-  InputLabel: {
-    color: 'white',
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: '#1f1f1f',
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  fontModalTitle: {
-    color: 'white',
-    fontSize: 24,
-  },
-  Kirim: {
-    textTransform: 'none',
-    marginTop: 65,
-    height: 40,
-    width: 350,
-    fontSize: '18px',
-    background: '#E50914',
-    color: 'white',
-    '&:hover': {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: 'white',
-      color: '#E50914',
-    },
-  },
-  cheatMargin: {
-    width: 218,
-  },
-  succsessMessage: {
-    color: 'green',
-  },
-  errorMessage: {
-    color: 'green',
-  },
-  TitlePage: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: '900',
-    marginRight: 1036,
-    marginTop: 45,
-  },
-});
-
 class addSong extends Component {
   constructor(props, context) {
     super(props, context);
@@ -335,7 +85,7 @@ class addSong extends Component {
 
   render(props) {
     const { classes } = this.props;
-    const { artistData, loadingGetArtist, errorGetArtist } = this.props.getDataArtistReducer;
+    const { artistData, loadingGetArtist } = this.props.getDataArtistReducer;
     const { messageAddSong, loadingAddSong, errorAddSong } = this.props.postDataSongsReducer;
     return (
       <div className={classes.divBase}>
@@ -589,6 +339,256 @@ class addSong extends Component {
     );
   }
 }
+
+const styles = (theme) => ({
+  // Styling Dropdown
+  root: {
+    fontColor: 'white',
+    color: 'white',
+    labelColor: 'white',
+  },
+
+  formControl: {
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 5,
+    height: 50,
+    width: 1161,
+    border: '2px solid white',
+    fontColor: 'white',
+    color: 'white',
+    backgroundColor: 'rgba(210, 210, 210, 0.25)',
+    laberColor: 'white',
+    borderRadius: 5,
+  },
+  dropdownStyle: {
+    border: '2px solid white',
+    backgroundColor: '#353535',
+    fontColor: 'white',
+    color: 'white',
+    laberColor: 'white',
+  },
+  select: {
+    '&:before': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+    },
+    '&:after': {
+      borderColor: 'white',
+      labelColor: 'white',
+      fontColor: 'white',
+    },
+  },
+  iconDropdown: {
+    fill: 'white',
+  },
+  // End Styling Dropdown
+
+  divGrid: {
+    width: 1150,
+    height: 2222,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+    color: 'white',
+    fontColor: 'white',
+  },
+  divider: {
+    height: 50,
+  },
+  divWarping: {
+    backgroundColor: 'green',
+    color: 'white',
+  },
+  textField: {
+    background: 'rgba(210, 210, 210, 0.25)',
+    marginLeft: 4,
+    marginRight: theme.spacing.unit,
+    width: 935,
+    height: 50,
+  },
+  textFieldInsertLinkThumbnailEpisode: {
+    background: 'rgba(210, 210, 210, 0.25)',
+    width: 211,
+    height: 50,
+  },
+  textField3: {
+    background: 'rgba(210, 210, 210, 0.25)',
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 927,
+    height: 50,
+  },
+  textField2: {
+    background: 'rgba(210, 210, 210, 0.25)',
+    width: 1157,
+    height: 50,
+    marginLeft: 4,
+  },
+  cssLabel: {
+    color: '#B1B1B1',
+  },
+
+  cssOutlinedInput: {
+    '&$cssFocused $notchedOutline': {
+      borderColor: `red !important`,
+      color: `white !important`,
+    },
+  },
+
+  cssFocused: {
+    color: 'white',
+    textColor: 'white',
+  },
+
+  notchedOutline: {
+    borderWidth: '2px',
+    borderColor: 'white !important',
+  },
+  floatingLabelFocusStyle: {
+    color: 'white',
+  },
+  ButtonAttatch: {
+    textTransform: 'none',
+    marginTop: 13,
+    height: 55,
+    width: 213,
+    fontSize: '14px',
+    background: 'rgba(210, 210, 210, 0.25)',
+    color: '#B1B1B1',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderWidth: 2,
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#E50914',
+      color: 'white',
+    },
+  },
+  ButtonAttatchSong: {
+    textTransform: 'none',
+    marginRight: 943,
+    height: 55,
+    width: 213,
+    fontSize: '14px',
+    background: 'rgba(210, 210, 210, 0.25)',
+    color: '#B1B1B1',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderWidth: 2,
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#E50914',
+      color: 'white',
+    },
+  },
+  ButtonAddForm: {
+    textTransform: 'none',
+    marginTop: 13,
+    marginLeft: 9,
+    height: 30,
+    width: 1150,
+    fontSize: '14px',
+    background: 'rgba(210, 210, 210, 0.25)',
+    color: 'red',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderWidth: 2,
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#E50914',
+      color: 'white',
+    },
+  },
+  ButtonSave: {
+    textTransform: 'none',
+    marginTop: 34,
+    height: 40,
+    width: 350,
+    fontSize: '14px',
+    background: '#F58033',
+    color: 'white',
+    borderStyle: 'solid',
+    borderColor: 'white',
+    borderWidth: 2,
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#rgba(210, 210, 210, 0.25)',
+      color: 'red',
+    },
+  },
+  attatchText: {},
+  attatchIcon: {
+    paddingLeft: 4,
+    paddingTop: 11,
+  },
+  icon: {
+    fontSize: 40,
+  },
+  iconAddForm: {
+    fontSize: 40,
+  },
+  TextareaAutosize: {
+    marginTop: 5,
+    marginLeft: 1,
+    marginBottom: 30,
+    width: 1145,
+    color: 'white',
+    borderRadius: 5,
+    backgroundColor: '#353535',
+  },
+  InputLabel: {
+    color: 'white',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: '#1f1f1f',
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  fontModalTitle: {
+    color: 'white',
+    fontSize: 24,
+  },
+  Kirim: {
+    textTransform: 'none',
+    marginTop: 65,
+    height: 40,
+    width: 350,
+    fontSize: '18px',
+    background: '#E50914',
+    color: 'white',
+    '&:hover': {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: 'white',
+      color: '#E50914',
+    },
+  },
+  cheatMargin: {
+    width: 218,
+  },
+  succsessMessage: {
+    color: 'green',
+  },
+  errorMessage: {
+    color: 'green',
+  },
+  TitlePage: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '900',
+    marginRight: 1036,
+    marginTop: 45,
+  },
+});
 
 const mapStateToProps = (state) => {
   return {

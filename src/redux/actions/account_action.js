@@ -72,22 +72,16 @@ export function registerAction(input) {
 
 export function clearUserData() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_LOGIN_DATA });
-    }
+    dispatch({ type: CLEAR_LOGIN_DATA });
   };
 }
 export function clearError() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_ERROR });
-    }
+    dispatch({ type: CLEAR_ERROR });
   };
 }
 export function clearMessage() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_MESSAGE });
-    }
+    dispatch({ type: CLEAR_MESSAGE });
   };
 }

@@ -9,7 +9,6 @@ import {
   CLEAR_ERROR,
   CLEAR_MESSAGE,
 } from '../actionTypes';
-import { act } from 'react-dom/test-utils';
 
 const initialState = {
   userState: {},

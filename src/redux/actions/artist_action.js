@@ -32,16 +32,12 @@ export function PostDataArtistAction(artistData) {
 
 export function clearErrorArtist() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_ERROR_ARTIST });
-    }
+    dispatch({ type: CLEAR_ERROR_ARTIST });
   };
 }
 export function clearMessageArtist() {
   return function (dispatch) {
-    {
-      dispatch({ type: CLEAR_MESSAGE_ARTIST });
-    }
+    dispatch({ type: CLEAR_MESSAGE_ARTIST });
   };
 }
 

@@ -10,7 +10,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Trans from '../data/trans.json';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // moment adalah modul mengenawi waktu
 import Moment from 'moment';
@@ -18,101 +17,6 @@ import Moment from 'moment';
 import { getDataTransactionsAction, UpdateDataTransactionsAction } from '../redux/actions/transactions_action';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: '#1F1F1F',
-    color: 'red',
-  },
-  body: {
-    fontSize: 14,
-    backgroundColor: '#1f1f1f',
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    backgroundColor: '#1f1f1f',
-    color: 'white',
-    '&:nth-of-type(odd)': {
-      backgroundColor: '#2a2a2a',
-
-      color: 'white',
-    },
-  },
-}))(TableRow);
-const styles = (theme) => ({
-  table: {
-    width: 1000,
-    background: '#161616',
-  },
-  divider: {
-    height: 100,
-  },
-  dividerTableBottom: {
-    height: 43,
-    width: '100%',
-    color: 'red',
-  },
-  tableFontColorWhite: {
-    color: 'white',
-  },
-  tableFontColorGreen: {
-    color: 'green',
-  },
-  tableFontColorRed: {
-    color: 'red',
-  },
-  tableFontColorOrange: {
-    color: '#F7941E',
-  },
-  idCostumize: {
-    color: 'white',
-    width: 1,
-  },
-  idCostumizeRed: {
-    color: 'red',
-    width: 1,
-  },
-  idCostumizeGreen: {
-    color: 'red',
-    width: 1,
-  },
-  ButtonAction: {
-    color: '#1C9CD2',
-  },
-  ButtonActionIcon: {
-    color: '#1C9CD2',
-    fontSize: 100,
-    position: 'relative',
-  },
-  divBaseDropdown: {
-    position: 'absolute',
-    background: '#1F1F1F',
-    borderRadius: 4,
-    top: 34,
-    right: 82,
-    width: 89,
-    height: 74,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: 'red',
-  },
-  tableActionMenu: {
-    position: 'relative',
-  },
-  divBaseRelative: {
-    position: 'relative',
-  },
-  ButtonApproved: {
-    color: '#0ACF83',
-    fontWeight: 500,
-  },
-  ButtonCancel: {
-    color: '#FF0000',
-    fontWeight: 500,
-  },
-});
 
 class transactionPage extends Component {
   constructor(props) {
@@ -145,7 +49,7 @@ class transactionPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { dataTransactions, loadingTransactions, errorTransactions } = this.props.transactionsReducer;
+    const { dataTransactions } = this.props.transactionsReducer;
     let startDate = new Date();
     let dueDate = Moment(startDate);
     dueDate.add(1, 'months');
@@ -256,6 +160,101 @@ class transactionPage extends Component {
     );
   }
 }
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: '#1F1F1F',
+    color: 'red',
+  },
+  body: {
+    fontSize: 14,
+    backgroundColor: '#1f1f1f',
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    backgroundColor: '#1f1f1f',
+    color: 'white',
+    '&:nth-of-type(odd)': {
+      backgroundColor: '#2a2a2a',
+
+      color: 'white',
+    },
+  },
+}))(TableRow);
+const styles = (theme) => ({
+  table: {
+    width: 1000,
+    background: '#161616',
+  },
+  divider: {
+    height: 100,
+  },
+  dividerTableBottom: {
+    height: 43,
+    width: '100%',
+    color: 'red',
+  },
+  tableFontColorWhite: {
+    color: 'white',
+  },
+  tableFontColorGreen: {
+    color: 'green',
+  },
+  tableFontColorRed: {
+    color: 'red',
+  },
+  tableFontColorOrange: {
+    color: '#F7941E',
+  },
+  idCostumize: {
+    color: 'white',
+    width: 1,
+  },
+  idCostumizeRed: {
+    color: 'red',
+    width: 1,
+  },
+  idCostumizeGreen: {
+    color: 'red',
+    width: 1,
+  },
+  ButtonAction: {
+    color: '#1C9CD2',
+  },
+  ButtonActionIcon: {
+    color: '#1C9CD2',
+    fontSize: 100,
+    position: 'relative',
+  },
+  divBaseDropdown: {
+    position: 'absolute',
+    background: '#1F1F1F',
+    borderRadius: 4,
+    top: 34,
+    right: 82,
+    width: 89,
+    height: 74,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: 'red',
+  },
+  tableActionMenu: {
+    position: 'relative',
+  },
+  divBaseRelative: {
+    position: 'relative',
+  },
+  ButtonApproved: {
+    color: '#0ACF83',
+    fontWeight: 500,
+  },
+  ButtonCancel: {
+    color: '#FF0000',
+    fontWeight: 500,
+  },
+});
 
 const mapStateToProps = (state) => {
   return {

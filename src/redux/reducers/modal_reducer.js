@@ -6,10 +6,6 @@ const initialStateLoginModal = {
   loginModalOpen: false,
 };
 
-const initialStateAddEpisodeModal = {
-  addEpisodeModalOpen: false,
-};
-
 export const modalRegisterReducer = (state = initialStateRegisterModal, action) => {
   switch (action.type) {
     case OPEN_MODAL_REGISTER:
