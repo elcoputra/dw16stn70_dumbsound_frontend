@@ -113,7 +113,7 @@ class songsCard extends Component {
                 alignItems='flex-start'
               >
                 {songs
-                  ? songs.reverse().map((detailData) => {
+                  ? songs.map((detailData) => {
                       return (
                         <div className={classes.Div}>
                           <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
