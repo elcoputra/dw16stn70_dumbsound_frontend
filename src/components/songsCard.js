@@ -113,57 +113,54 @@ class songsCard extends Component {
                 alignItems='flex-start'
               >
                 {songs
-                  ? songs
-                      .reverse()
-                      .slice(this.props.init, this.props.end)
-                      .map((detailData) => {
-                        return (
-                          <div className={classes.Div}>
-                            <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
-                              <div>
-                                {this.state.mouseHover && detailData.id === this.state.idMouseHover && userState.isAdmin ? (
-                                  this.onHoverItem(
-                                    detailData.id,
-                                    detailData.title,
-                                    detailData.artist.name,
-                                    detailData.year,
-                                    detailData.thumbnailLink,
-                                    detailData.musicLink,
-                                  )
-                                ) : (
-                                  <Card classes={{ root: classes.rootCard }} className={classes.Card}>
-                                    <CardActionArea
-                                      onClick={
-                                        userState.isAdmin || userState.subscribe
-                                          ? () => this.props.getDetailSongAction(detailData.id)
-                                          : null
-                                      }
-                                      className={classes.CardActionArea}
-                                    >
-                                      <Link className={classes.Link}>
-                                        <div className={classes.divImg}>
-                                          <img src={detailData.thumbnailLink} alt={detailData.title} className={classes.Img} />
-                                        </div>
-                                        <Grid container direction='row' justify='space-around' alignItems='center'>
-                                          <Grid xs>
-                                            <Typography noWrap className={classes.TypographyTitle}>
-                                              {detailData.title}
-                                            </Typography>
-                                          </Grid>
-                                          <Grid xs>
-                                            <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
-                                          </Grid>
+                  ? songs.reverse().map((detailData) => {
+                      return (
+                        <div className={classes.Div}>
+                          <Grid item xs onMouseEnter={() => this.onMouseEnterHandler(detailData.id)}>
+                            <div>
+                              {this.state.mouseHover && detailData.id === this.state.idMouseHover && userState.isAdmin ? (
+                                this.onHoverItem(
+                                  detailData.id,
+                                  detailData.title,
+                                  detailData.artist.name,
+                                  detailData.year,
+                                  detailData.thumbnailLink,
+                                  detailData.musicLink,
+                                )
+                              ) : (
+                                <Card classes={{ root: classes.rootCard }} className={classes.Card}>
+                                  <CardActionArea
+                                    onClick={
+                                      userState.isAdmin || userState.subscribe
+                                        ? () => this.props.getDetailSongAction(detailData.id)
+                                        : null
+                                    }
+                                    className={classes.CardActionArea}
+                                  >
+                                    <Link className={classes.Link}>
+                                      <div className={classes.divImg}>
+                                        <img src={detailData.thumbnailLink} alt={detailData.title} className={classes.Img} />
+                                      </div>
+                                      <Grid container direction='row' justify='space-around' alignItems='center'>
+                                        <Grid xs>
+                                          <Typography noWrap className={classes.TypographyTitle}>
+                                            {detailData.title}
+                                          </Typography>
                                         </Grid>
-                                        <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
-                                      </Link>
-                                    </CardActionArea>
-                                  </Card>
-                                )}
-                              </div>
-                            </Grid>
-                          </div>
-                        );
-                      })
+                                        <Grid xs>
+                                          <Typography className={classes.TypographyYear}>{detailData.year}</Typography>
+                                        </Grid>
+                                      </Grid>
+                                      <Typography className={classes.TypographyArtist}>{detailData.artist.name}</Typography>
+                                    </Link>
+                                  </CardActionArea>
+                                </Card>
+                              )}
+                            </div>
+                          </Grid>
+                        </div>
+                      );
+                    })
                   : null}
               </Grid>
             </Grid>
