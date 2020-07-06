@@ -71,7 +71,7 @@ class transactionPage extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {dataTransactions.reverse().map((row) => (
+                {dataTransactions.map((row) => (
                   <StyledTableRow key={row.id}>
                     <TableCell className={classes.idCostumize} component='left' scope='row'>
                       {row.id}
