@@ -8,13 +8,13 @@ import {
 } from '../actionTypes';
 import { API } from '../../config/axiosConfig';
 
-export function getDataTransactionsAction() {
+export function getDataTransactionsAction(target) {
   return function (dispatch) {
     dispatch({
       type: TRANS_REQUEST,
       payload: true,
     });
-    API.get('/transactions')
+    API.post('/transactions', { target: target })
       .then((response) =>
         dispatch({
           type: TRANS_SUCCSESS,
