@@ -30,7 +30,7 @@ export function getDataTransactionsAction(target) {
   };
 }
 
-export function UpdateDataTransactionsAction(transId, updateData) {
+export function UpdateDataTransactionsAction(transId, updateData, filterState) {
   return function (dispatch) {
     dispatch({
       type: TRANS_UPDATE_REQUEST,
@@ -43,7 +43,7 @@ export function UpdateDataTransactionsAction(transId, updateData) {
           payload: response.data.data,
         }),
       )
-      .then(() => dispatch(getDataTransactionsAction()))
+      .then(() => dispatch(getDataTransactionsAction(filterState)))
       .catch((error) =>
         dispatch({
           type: TRANS_UPDATE_ERROR,

@@ -29,7 +29,7 @@ class transactionPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getDataTransactionsAction('all');
+    this.props.getDataTransactionsAction(this.state.filterState);
   };
 
   openDropdown(dataID) {
@@ -181,11 +181,15 @@ class transactionPage extends Component {
                               <Button
                                 onClick={() => {
                                   this.openDropdown(row.id);
-                                  this.props.UpdateDataTransactionsAction(row.id, {
-                                    status: 'Approved',
-                                    userId: row.userId,
-                                    dueDate: dueDate,
-                                  });
+                                  this.props.UpdateDataTransactionsAction(
+                                    row.id,
+                                    {
+                                      status: 'Approved',
+                                      userId: row.userId,
+                                      dueDate: dueDate,
+                                    },
+                                    this.state.filterState,
+                                  );
                                 }}
                                 className={classes.ButtonApproved}
                               >
@@ -194,7 +198,11 @@ class transactionPage extends Component {
                               <Button
                                 onClick={() => {
                                   this.openDropdown(row.id);
-                                  this.props.UpdateDataTransactionsAction(row.id, { status: 'Denied', userId: row.userId });
+                                  this.props.UpdateDataTransactionsAction(
+                                    row.id,
+                                    { status: 'Denied', userId: row.userId },
+                                    this.state.filterState,
+                                  );
                                 }}
                                 className={classes.ButtonCancel}
                               >
