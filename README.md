@@ -5,10 +5,11 @@ online test : [Dumbsound online](https://dumbsound.netlify.app/)
 - login default 
 	- email : user@gmail.com
 	- password : 1234
+- For email and admin password, please send a message to me.
 - Or you can register a new account, but can't play songs.
 # Welcome to Dumbsound Web App!
 Dumbsound is a music streaming service, providing music from various countries, artists and record labels.
-[Go to backend](https://github.com/elcoputra/dw16stn70_dumbsound_backend)
+[Go to backend](https://github.com/elcoputra/dw16stn70_dumbsound_backend) [Go to dumbsound mobile](https://github.com/elcoputra/dw16stn70_dumbsound_native)
 ## Current Status
 PROTOTYPE
 ## Technology
